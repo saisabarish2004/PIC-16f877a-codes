@@ -1,0 +1,4 @@
+_delay: CODE, 1960 0 40
+_main: CODE, 1931 0 29
+_adc: CODE, 2000 0 48
+Total: 117
