@@ -1,0 +1,763 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.80 build 6738 
+                                                                                               Wed Jan 24 17:40:05 2024
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6738
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6738"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_lcdcmd
+    43                           	FNCALL	_main,_lcddata
+    44                           	FNCALL	_main,_delay
+    45                           	FNCALL	_lcddata,_delay
+    46                           	FNCALL	_lcdcmd,_delay
+    47                           	FNROOT	_main
+    48                           	global	main@F517
+    49                           psect	idataCOMMON,class=CODE,space=0,delta=2
+    50                           global __pidataCOMMON
+    51  0734                     __pidataCOMMON:
+    52                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+    53                           	line	16
+    54                           
+    55                           ;initializer for main@F517
+    56  0734  3473               	retlw	073h
+    57  0735  3461               	retlw	061h
+    58  0736  3469               	retlw	069h
+    59  0737  3400               	retlw	0
+    60                           	global	_RD0
+    61  0040                     _RD0	set	64
+    62                           	global	_RD1
+    63  0041                     _RD1	set	65
+    64                           	global	_RD2
+    65  0042                     _RD2	set	66
+    66                           	global	_TRISB
+    67  0086                     _TRISB	set	134
+    68                           	global	_TRISD
+    69  0088                     _TRISD	set	136
+    70                           	file	"pic 7seg 1.as"
+    71                           	line	#
+    72                           psect cinit,class=CODE,delta=2
+    73                           global start_initialization
+    74  0754                     start_initialization:
+    75                           
+    76                           psect	dataCOMMON,class=COMMON,space=1
+    77                           global __pdataCOMMON
+    78  0078                     __pdataCOMMON:
+    79                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+    80  0078                     main@F517:
+    81  0078                            ds      4
+    82                           
+    83                           ; Initialize objects allocated to COMMON
+    84                           	global __pidataCOMMON
+    85                           psect cinit,class=CODE,delta=2
+    86  0754  120A  118A  2734   	fcall	__pidataCOMMON+0		;fetch initializer
+              120A  118A         
+    87  0759  00F8               	movwf	__pdataCOMMON+0&07fh		
+    88  075A  120A  118A  2735   	fcall	__pidataCOMMON+1		;fetch initializer
+              120A  118A         
+    89  075F  00F9               	movwf	__pdataCOMMON+1&07fh		
+    90  0760  120A  118A  2736   	fcall	__pidataCOMMON+2		;fetch initializer
+              120A  118A         
+    91  0765  00FA               	movwf	__pdataCOMMON+2&07fh		
+    92  0766  120A  118A  2737   	fcall	__pidataCOMMON+3		;fetch initializer
+              120A  118A         
+    93  076B  00FB               	movwf	__pdataCOMMON+3&07fh		
+    94                           psect cinit,class=CODE,delta=2
+    95                           global end_of_initialization
+    96                           
+    97                           ;End of C runtime variable initialization code
+    98                           
+    99  076C                     end_of_initialization:
+   100  076C  0183               clrf status
+   101  076D  120A  118A  2F98   ljmp _main	;jump to C main() function
+   102                           psect	cstackCOMMON,class=COMMON,space=1
+   103                           global __pcstackCOMMON
+   104  0070                     __pcstackCOMMON:
+   105                           	global	?_lcdcmd
+   106  0070                     ?_lcdcmd:	; 0 bytes @ 0x0
+   107                           	global	?_lcddata
+   108  0070                     ?_lcddata:	; 0 bytes @ 0x0
+   109                           	global	?_delay
+   110  0070                     ?_delay:	; 0 bytes @ 0x0
+   111                           	global	??_delay
+   112  0070                     ??_delay:	; 0 bytes @ 0x0
+   113                           	global	?_main
+   114  0070                     ?_main:	; 0 bytes @ 0x0
+   115                           	global	lcdcmd@a
+   116  0070                     lcdcmd@a:	; 1 bytes @ 0x0
+   117                           	global	lcddata@a
+   118  0070                     lcddata@a:	; 1 bytes @ 0x0
+   119                           	global	delay@k_321
+   120  0070                     delay@k_321:	; 2 bytes @ 0x0
+   121  0070                     	ds	2
+   122                           	global	??_lcdcmd
+   123  0072                     ??_lcdcmd:	; 0 bytes @ 0x2
+   124                           	global	??_lcddata
+   125  0072                     ??_lcddata:	; 0 bytes @ 0x2
+   126                           	global	??_main
+   127  0072                     ??_main:	; 0 bytes @ 0x2
+   128                           	global	main@a
+   129  0072                     main@a:	; 4 bytes @ 0x2
+   130  0072                     	ds	4
+   131                           	global	main@j
+   132  0076                     main@j:	; 2 bytes @ 0x6
+   133  0076                     	ds	2
+   134 ;;Data sizes: Strings 0, constant 0, data 4, bss 0, persistent 0 stack 0
+   135 ;;Auto spaces:   Size  Autos    Used
+   136 ;; COMMON          14      8      12
+   137 ;; BANK0           80      0       0
+   138 ;; BANK1           80      0       0
+   139 ;; BANK3           96      0       0
+   140 ;; BANK2           96      0       0
+   141                           
+   142 ;;
+   143 ;; Pointer list with targets:
+   144                           
+   145                           
+   146                           
+   147 ;;
+   148 ;; Critical Paths under _main in COMMON
+   149 ;;
+   150 ;;   _main->_delay
+   151 ;;   _lcddata->_delay
+   152 ;;   _lcdcmd->_delay
+   153 ;;
+   154 ;; Critical Paths under _main in BANK0
+   155 ;;
+   156 ;;   None.
+   157 ;;
+   158 ;; Critical Paths under _main in BANK1
+   159 ;;
+   160 ;;   None.
+   161 ;;
+   162 ;; Critical Paths under _main in BANK3
+   163 ;;
+   164 ;;   None.
+   165 ;;
+   166 ;; Critical Paths under _main in BANK2
+   167 ;;
+   168 ;;   None.
+   169                           
+   170 ;;
+   171 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   172 ;;
+   173                           
+   174 ;;
+   175 ;;Call Graph Tables:
+   176 ;;
+   177 ;; ---------------------------------------------------------------------------------
+   178 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   179 ;; ---------------------------------------------------------------------------------
+   180 ;; (0) _main                                                 6     6      0     150
+   181 ;;                                              2 COMMON     6     6      0
+   182 ;;                             _lcdcmd
+   183 ;;                            _lcddata
+   184 ;;                              _delay
+   185 ;; ---------------------------------------------------------------------------------
+   186 ;; (1) _lcddata                                              1     1      0      30
+   187 ;;                              _delay
+   188 ;; ---------------------------------------------------------------------------------
+   189 ;; (1) _lcdcmd                                               1     1      0      30
+   190 ;;                              _delay
+   191 ;; ---------------------------------------------------------------------------------
+   192 ;; (1) _delay                                                4     4      0      30
+   193 ;;                                              0 COMMON     2     2      0
+   194 ;; ---------------------------------------------------------------------------------
+   195 ;; Estimated maximum stack depth 1
+   196 ;; ---------------------------------------------------------------------------------
+   197                           
+   198 ;; Call Graph Graphs:
+   199                           
+   200 ;; _main (ROOT)
+   201 ;;   _lcdcmd
+   202 ;;     _delay
+   203 ;;   _lcddata
+   204 ;;     _delay
+   205 ;;   _delay
+   206 ;;
+   207                           
+   208 ;; Address spaces:
+   209                           
+   210 ;;Name               Size   Autos  Total    Cost      Usage
+   211 ;;BANK3               60      0       0       9        0.0%
+   212 ;;BITBANK3            60      0       0       8        0.0%
+   213 ;;SFR3                 0      0       0       4        0.0%
+   214 ;;BITSFR3              0      0       0       4        0.0%
+   215 ;;BANK2               60      0       0      11        0.0%
+   216 ;;BITBANK2            60      0       0      10        0.0%
+   217 ;;SFR2                 0      0       0       5        0.0%
+   218 ;;BITSFR2              0      0       0       5        0.0%
+   219 ;;SFR1                 0      0       0       2        0.0%
+   220 ;;BITSFR1              0      0       0       2        0.0%
+   221 ;;BANK1               50      0       0       7        0.0%
+   222 ;;BITBANK1            50      0       0       6        0.0%
+   223 ;;CODE                 0      0       0       0        0.0%
+   224 ;;DATA                 0      0       E      12        0.0%
+   225 ;;ABS                  0      0       C       3        0.0%
+   226 ;;NULL                 0      0       0       0        0.0%
+   227 ;;STACK                0      0       2       2        0.0%
+   228 ;;BANK0               50      0       0       5        0.0%
+   229 ;;BITBANK0            50      0       0       4        0.0%
+   230 ;;SFR0                 0      0       0       1        0.0%
+   231 ;;BITSFR0              0      0       0       1        0.0%
+   232 ;;COMMON               E      8       C       1       85.7%
+   233 ;;BITCOMMON            E      0       0       0        0.0%
+   234 ;;EEDATA             100      0       0       0        0.0%
+   235                           
+   236                           	global	_main
+   237                           psect	maintext,global,class=CODE,delta=2
+   238                           global __pmaintext
+   239  0798                     __pmaintext:
+   240                           
+   241 ;; *************** function _main *****************
+   242 ;; Defined at:
+   243 ;;		line 6 in file "E:\sai em pic\pic 7seg\picled1.c"
+   244 ;; Parameters:    Size  Location     Type
+   245 ;;		None
+   246 ;; Auto vars:     Size  Location     Type
+   247 ;;  j               2    6[COMMON] int 
+   248 ;;  a               4    2[COMMON] unsigned char [4]
+   249 ;; Return value:  Size  Location     Type
+   250 ;;		None               void
+   251 ;; Registers used:
+   252 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   253 ;; Tracked objects:
+   254 ;;		On entry : 17F/0
+   255 ;;		On exit  : 0/0
+   256 ;;		Unchanged: 0/0
+   257 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   258 ;;      Params:         0       0       0       0       0
+   259 ;;      Locals:         6       0       0       0       0
+   260 ;;      Temps:          0       0       0       0       0
+   261 ;;      Totals:         6       0       0       0       0
+   262 ;;Total ram usage:        6 bytes
+   263 ;; Hardware stack levels required when called:    2
+   264 ;; This function calls:
+   265 ;;		_lcdcmd
+   266 ;;		_lcddata
+   267 ;;		_delay
+   268 ;; This function is called by:
+   269 ;;		Startup code after reset
+   270 ;; This function uses a non-reentrant model
+   271 ;;
+   272                           psect	maintext
+   273                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+   274                           	line	6
+   275                           	global	__size_of_main
+   276  0068                     	__size_of_main	equ	__end_of_main-_main
+   277                           	
+   278  0798                     _main:	
+   279                           	opt	stack 6
+   280                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   281                           	line	7
+   282                           	
+   283  0798                     l1757:	
+   284                           ;picled1.c: 7: TRISB=0;
+   285  0798  1683               	bsf	status, 5	;RP0=1, select bank1
+   286  0799  1303               	bcf	status, 6	;RP1=0, select bank1
+   287  079A  0186               	clrf	(134)^080h	;volatile
+   288                           	line	8
+   289                           ;picled1.c: 8: TRISD=0;
+   290  079B  0188               	clrf	(136)^080h	;volatile
+   291                           	line	9
+   292                           	
+   293  079C                     l1759:	
+   294                           ;picled1.c: 9: lcdcmd(0X38);
+   295  079C  3038               	movlw	(038h)
+   296  079D  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   297                           	line	10
+   298                           	
+   299  07A2                     l1761:	
+   300                           ;picled1.c: 10: lcdcmd(0X0C);
+   301  07A2  300C               	movlw	(0Ch)
+   302  07A3  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   303                           	line	11
+   304                           	
+   305  07A8                     l1763:	
+   306                           ;picled1.c: 11: lcdcmd(0X10);
+   307  07A8  3010               	movlw	(010h)
+   308  07A9  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   309                           	line	12
+   310                           	
+   311  07AE                     l1765:	
+   312                           ;picled1.c: 12: lcdcmd(0X06);
+   313  07AE  3006               	movlw	(06h)
+   314  07AF  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   315                           	line	13
+   316                           	
+   317  07B4                     l1767:	
+   318                           ;picled1.c: 13: lcdcmd(0X01);
+   319  07B4  3001               	movlw	(01h)
+   320  07B5  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   321                           	line	14
+   322                           	
+   323  07BA                     l1769:	
+   324                           ;picled1.c: 14: lcdcmd(0X80);
+   325  07BA  3080               	movlw	(080h)
+   326  07BB  120A  118A  2738   	fcall	_lcdcmd
+              120A  118A         
+   327                           	line	16
+   328                           	
+   329  07C0                     l1771:	
+   330                           ;picled1.c: 16: char a[]={"sai"};
+   331  07C0  087B               	movf	(main@F517+3),w
+   332  07C1  00F5               	movwf	(main@a+3)
+   333  07C2  087A               	movf	(main@F517+2),w
+   334  07C3  00F4               	movwf	(main@a+2)
+   335  07C4  0879               	movf	(main@F517+1),w
+   336  07C5  00F3               	movwf	(main@a+1)
+   337  07C6  0878               	movf	(main@F517),w
+   338  07C7  00F2               	movwf	(main@a)
+   339                           
+   340                           	line	17
+   341                           	
+   342  07C8                     l1773:	
+   343                           ;picled1.c: 17: for( int j=0;j<=4;j++)
+   344  07C8  3000               	movlw	low(0)
+   345  07C9  00F6               	movwf	(main@j)
+   346  07CA  3000               	movlw	high(0)
+   347  07CB  00F7               	movwf	((main@j))+1
+   348                           	
+   349  07CC                     l1775:	
+   350  07CC  0877               	movf	(main@j+1),w
+   351  07CD  3A80               	xorlw	80h
+   352  07CE  00FF               	movwf	btemp+1
+   353  07CF  3080               	movlw	(high(05h))^80h
+   354  07D0  027F               	subwf	btemp+1,w
+   355  07D1  1D03               	skipz
+   356  07D2  2FD5               	goto	u2165
+   357  07D3  3005               	movlw	low(05h)
+   358  07D4  0276               	subwf	(main@j),w
+   359  07D5                     u2165:
+   360                           
+   361  07D5  1C03               	skipc
+   362  07D6  2FD8               	goto	u2161
+   363  07D7  2FD9               	goto	u2160
+   364  07D8                     u2161:
+   365  07D8  2FDB               	goto	l1779
+   366  07D9                     u2160:
+   367  07D9  2FFD               	goto	l569
+   368                           	
+   369  07DA                     l1777:	
+   370  07DA  2FFD               	goto	l569
+   371                           	line	18
+   372                           	
+   373  07DB                     l567:	
+   374                           	line	20
+   375                           	
+   376  07DB                     l1779:	
+   377                           ;picled1.c: 18: {
+   378                           ;picled1.c: 20: lcddata(a[j]);
+   379  07DB  0876               	movf	(main@j),w
+   380  07DC  3E72               	addlw	main@a&0ffh
+   381  07DD  0084               	movwf	fsr0
+   382  07DE  0800               	movf	indf,w
+   383  07DF  120A  118A  2746   	fcall	_lcddata
+              120A  118A         
+   384                           	line	21
+   385                           	
+   386  07E4                     l1781:	
+   387                           ;picled1.c: 21: delay();
+   388  07E4  120A  118A  2770   	fcall	_delay
+              120A  118A         
+   389                           	line	17
+   390                           	
+   391  07E9                     l1783:	
+   392  07E9  3001               	movlw	low(01h)
+   393  07EA  07F6               	addwf	(main@j),f
+   394  07EB  1803               	skipnc
+   395  07EC  0AF7               	incf	(main@j+1),f
+   396  07ED  3000               	movlw	high(01h)
+   397  07EE  07F7               	addwf	(main@j+1),f
+   398                           	
+   399  07EF                     l1785:	
+   400  07EF  0877               	movf	(main@j+1),w
+   401  07F0  3A80               	xorlw	80h
+   402  07F1  00FF               	movwf	btemp+1
+   403  07F2  3080               	movlw	(high(05h))^80h
+   404  07F3  027F               	subwf	btemp+1,w
+   405  07F4  1D03               	skipz
+   406  07F5  2FF8               	goto	u2175
+   407  07F6  3005               	movlw	low(05h)
+   408  07F7  0276               	subwf	(main@j),w
+   409  07F8                     u2175:
+   410                           
+   411  07F8  1C03               	skipc
+   412  07F9  2FFB               	goto	u2171
+   413  07FA  2FFC               	goto	u2170
+   414  07FB                     u2171:
+   415  07FB  2FDB               	goto	l1779
+   416  07FC                     u2170:
+   417  07FC  2FFD               	goto	l569
+   418                           	
+   419  07FD                     l568:	
+   420                           	line	24
+   421                           	
+   422  07FD                     l569:	
+   423                           	global	start
+   424  07FD  120A  118A  2800   	ljmp	start
+   425                           	opt stack 0
+   426                           GLOBAL	__end_of_main
+   427  0800                     	__end_of_main:
+   428 ;; =============== function _main ends ============
+   429                           
+   430                           	signat	_main,88
+   431                           	global	_lcddata
+   432                           psect	text79,local,class=CODE,delta=2
+   433                           global __ptext79
+   434  0746                     __ptext79:
+   435                           
+   436 ;; *************** function _lcddata *****************
+   437 ;; Defined at:
+   438 ;;		line 34 in file "E:\sai em pic\pic 7seg\picled1.c"
+   439 ;; Parameters:    Size  Location     Type
+   440 ;;  a               1    wreg     unsigned char 
+   441 ;; Auto vars:     Size  Location     Type
+   442 ;;  a               1    0[COMMON] unsigned char 
+   443 ;; Return value:  Size  Location     Type
+   444 ;;		None               void
+   445 ;; Registers used:
+   446 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   447 ;; Tracked objects:
+   448 ;;		On entry : 0/0
+   449 ;;		On exit  : 0/0
+   450 ;;		Unchanged: 0/0
+   451 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   452 ;;      Params:         0       0       0       0       0
+   453 ;;      Locals:         0       0       0       0       0
+   454 ;;      Temps:          0       0       0       0       0
+   455 ;;      Totals:         0       0       0       0       0
+   456 ;;Total ram usage:        0 bytes
+   457 ;; Hardware stack levels used:    1
+   458 ;; Hardware stack levels required when called:    1
+   459 ;; This function calls:
+   460 ;;		_delay
+   461 ;; This function is called by:
+   462 ;;		_main
+   463 ;; This function uses a non-reentrant model
+   464 ;;
+   465                           psect	text79
+   466                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+   467                           	line	34
+   468                           	global	__size_of_lcddata
+   469  000E                     	__size_of_lcddata	equ	__end_of_lcddata-_lcddata
+   470                           	
+   471  0746                     _lcddata:	
+   472                           	opt	stack 6
+   473                           ; Regs used in _lcddata: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   474                           	line	35
+   475                           	
+   476  0746                     l1751:	
+   477                           ;picled1.c: 35: RD0=1;
+   478  0746  1283               	bcf	status, 5	;RP0=0, select bank0
+   479  0747  1303               	bcf	status, 6	;RP1=0, select bank0
+   480  0748  1408               	bsf	(64/8),(64)&7
+   481                           	line	36
+   482                           ;picled1.c: 36: RD1=0;
+   483  0749  1088               	bcf	(65/8),(65)&7
+   484                           	line	37
+   485                           ;picled1.c: 37: RD2=1;
+   486  074A  1508               	bsf	(66/8),(66)&7
+   487                           	line	38
+   488                           	
+   489  074B                     l1753:	
+   490                           ;picled1.c: 38: delay();
+   491  074B  120A  118A  2770   	fcall	_delay
+              120A  118A         
+   492                           	line	39
+   493                           	
+   494  0750                     l1755:	
+   495                           ;picled1.c: 39: RD2=0;
+   496  0750  1283               	bcf	status, 5	;RP0=0, select bank0
+   497  0751  1303               	bcf	status, 6	;RP1=0, select bank0
+   498  0752  1108               	bcf	(66/8),(66)&7
+   499                           	line	40
+   500                           	
+   501  0753                     l575:	
+   502  0753  0008               	return
+   503                           	opt stack 0
+   504                           GLOBAL	__end_of_lcddata
+   505  0754                     	__end_of_lcddata:
+   506 ;; =============== function _lcddata ends ============
+   507                           
+   508                           	signat	_lcddata,4216
+   509                           	global	_lcdcmd
+   510                           psect	text80,local,class=CODE,delta=2
+   511                           global __ptext80
+   512  0738                     __ptext80:
+   513                           
+   514 ;; *************** function _lcdcmd *****************
+   515 ;; Defined at:
+   516 ;;		line 26 in file "E:\sai em pic\pic 7seg\picled1.c"
+   517 ;; Parameters:    Size  Location     Type
+   518 ;;  a               1    wreg     unsigned char 
+   519 ;; Auto vars:     Size  Location     Type
+   520 ;;  a               1    0[COMMON] unsigned char 
+   521 ;; Return value:  Size  Location     Type
+   522 ;;		None               void
+   523 ;; Registers used:
+   524 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   525 ;; Tracked objects:
+   526 ;;		On entry : 0/0
+   527 ;;		On exit  : 0/0
+   528 ;;		Unchanged: 0/0
+   529 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   530 ;;      Params:         0       0       0       0       0
+   531 ;;      Locals:         0       0       0       0       0
+   532 ;;      Temps:          0       0       0       0       0
+   533 ;;      Totals:         0       0       0       0       0
+   534 ;;Total ram usage:        0 bytes
+   535 ;; Hardware stack levels used:    1
+   536 ;; Hardware stack levels required when called:    1
+   537 ;; This function calls:
+   538 ;;		_delay
+   539 ;; This function is called by:
+   540 ;;		_main
+   541 ;; This function uses a non-reentrant model
+   542 ;;
+   543                           psect	text80
+   544                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+   545                           	line	26
+   546                           	global	__size_of_lcdcmd
+   547  000E                     	__size_of_lcdcmd	equ	__end_of_lcdcmd-_lcdcmd
+   548                           	
+   549  0738                     _lcdcmd:	
+   550                           	opt	stack 6
+   551                           ; Regs used in _lcdcmd: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   552                           	line	27
+   553                           	
+   554  0738                     l1745:	
+   555                           ;picled1.c: 27: RD0=0;
+   556  0738  1283               	bcf	status, 5	;RP0=0, select bank0
+   557  0739  1303               	bcf	status, 6	;RP1=0, select bank0
+   558  073A  1008               	bcf	(64/8),(64)&7
+   559                           	line	28
+   560                           ;picled1.c: 28: RD1=0;
+   561  073B  1088               	bcf	(65/8),(65)&7
+   562                           	line	29
+   563                           ;picled1.c: 29: RD2=1;
+   564  073C  1508               	bsf	(66/8),(66)&7
+   565                           	line	30
+   566                           	
+   567  073D                     l1747:	
+   568                           ;picled1.c: 30: delay();
+   569  073D  120A  118A  2770   	fcall	_delay
+              120A  118A         
+   570                           	line	31
+   571                           	
+   572  0742                     l1749:	
+   573                           ;picled1.c: 31: RD2=0;
+   574  0742  1283               	bcf	status, 5	;RP0=0, select bank0
+   575  0743  1303               	bcf	status, 6	;RP1=0, select bank0
+   576  0744  1108               	bcf	(66/8),(66)&7
+   577                           	line	32
+   578                           	
+   579  0745                     l572:	
+   580  0745  0008               	return
+   581                           	opt stack 0
+   582                           GLOBAL	__end_of_lcdcmd
+   583  0746                     	__end_of_lcdcmd:
+   584 ;; =============== function _lcdcmd ends ============
+   585                           
+   586                           	signat	_lcdcmd,4216
+   587                           	global	_delay
+   588                           psect	text81,local,class=CODE,delta=2
+   589                           global __ptext81
+   590  0770                     __ptext81:
+   591                           
+   592 ;; *************** function _delay *****************
+   593 ;; Defined at:
+   594 ;;		line 42 in file "E:\sai em pic\pic 7seg\picled1.c"
+   595 ;; Parameters:    Size  Location     Type
+   596 ;;		None
+   597 ;; Auto vars:     Size  Location     Type
+   598 ;;  k               2    0[COMMON] int 
+   599 ;;  k               2    0        int 
+   600 ;; Return value:  Size  Location     Type
+   601 ;;		None               void
+   602 ;; Registers used:
+   603 ;;		wreg, btemp+1
+   604 ;; Tracked objects:
+   605 ;;		On entry : 0/0
+   606 ;;		On exit  : 0/0
+   607 ;;		Unchanged: 0/0
+   608 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   609 ;;      Params:         0       0       0       0       0
+   610 ;;      Locals:         2       0       0       0       0
+   611 ;;      Temps:          0       0       0       0       0
+   612 ;;      Totals:         2       0       0       0       0
+   613 ;;Total ram usage:        2 bytes
+   614 ;; Hardware stack levels used:    1
+   615 ;; This function calls:
+   616 ;;		Nothing
+   617 ;; This function is called by:
+   618 ;;		_main
+   619 ;;		_lcdcmd
+   620 ;;		_lcddata
+   621 ;; This function uses a non-reentrant model
+   622 ;;
+   623                           psect	text81
+   624                           	file	"E:\sai em pic\pic 7seg\picled1.c"
+   625                           	line	42
+   626                           	global	__size_of_delay
+   627  0028                     	__size_of_delay	equ	__end_of_delay-_delay
+   628                           	
+   629  0770                     _delay:	
+   630                           	opt	stack 7
+   631                           ; Regs used in _delay: [wreg+btemp+1]
+   632                           	line	44
+   633                           	
+   634  0770                     l949:	
+   635                           ;picled1.c: 43: int k;
+   636                           ;picled1.c: 44: for( int k =0;k<=4000;k++);
+   637  0770  3000               	movlw	low(0)
+   638  0771  00F0               	movwf	(delay@k_321)
+   639  0772  3000               	movlw	high(0)
+   640  0773  00F1               	movwf	((delay@k_321))+1
+   641                           	
+   642  0774                     l951:	
+   643  0774  0871               	movf	(delay@k_321+1),w
+   644  0775  3A80               	xorlw	80h
+   645  0776  00FF               	movwf	btemp+1
+   646  0777  308F               	movlw	(high(0FA1h))^80h
+   647  0778  027F               	subwf	btemp+1,w
+   648  0779  1D03               	skipz
+   649  077A  2F7D               	goto	u15
+   650  077B  30A1               	movlw	low(0FA1h)
+   651  077C  0270               	subwf	(delay@k_321),w
+   652  077D                     u15:
+   653                           
+   654  077D  1C03               	skipc
+   655  077E  2F80               	goto	u11
+   656  077F  2F81               	goto	u10
+   657  0780                     u11:
+   658  0780  2F83               	goto	l955
+   659  0781                     u10:
+   660  0781  2F97               	goto	l580
+   661                           	
+   662  0782                     l953:	
+   663  0782  2F97               	goto	l580
+   664                           	
+   665  0783                     l578:	
+   666                           	
+   667  0783                     l955:	
+   668  0783  3001               	movlw	low(01h)
+   669  0784  07F0               	addwf	(delay@k_321),f
+   670  0785  1803               	skipnc
+   671  0786  0AF1               	incf	(delay@k_321+1),f
+   672  0787  3000               	movlw	high(01h)
+   673  0788  07F1               	addwf	(delay@k_321+1),f
+   674                           	
+   675  0789                     l957:	
+   676  0789  0871               	movf	(delay@k_321+1),w
+   677  078A  3A80               	xorlw	80h
+   678  078B  00FF               	movwf	btemp+1
+   679  078C  308F               	movlw	(high(0FA1h))^80h
+   680  078D  027F               	subwf	btemp+1,w
+   681  078E  1D03               	skipz
+   682  078F  2F92               	goto	u25
+   683  0790  30A1               	movlw	low(0FA1h)
+   684  0791  0270               	subwf	(delay@k_321),w
+   685  0792                     u25:
+   686                           
+   687  0792  1C03               	skipc
+   688  0793  2F95               	goto	u21
+   689  0794  2F96               	goto	u20
+   690  0795                     u21:
+   691  0795  2F83               	goto	l955
+   692  0796                     u20:
+   693  0796  2F97               	goto	l580
+   694                           	
+   695  0797                     l579:	
+   696                           	line	45
+   697                           	
+   698  0797                     l580:	
+   699  0797  0008               	return
+   700                           	opt stack 0
+   701                           GLOBAL	__end_of_delay
+   702  0798                     	__end_of_delay:
+   703 ;; =============== function _delay ends ============
+   704                           
+   705                           	signat	_delay,88
+   706                           psect	text82,local,class=CODE,delta=2
+   707                           global __ptext82
+   708  0000                     __ptext82:
+   709                           	global	btemp
+   710  007E                     	btemp set 07Eh
+   711                           
+   712                           	DABS	1,126,2	;btemp
+   713                           	global	wtemp0
+   714  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.80 build 6738 
+Symbol Table                                                                                   Wed Jan 24 17:40:05 2024
+
+                  u10 0781                    u11 0780                    u20 0796                    u21 0795  
+                  u15 077D                    u25 0792                   l580 0797                   l572 0745  
+                 l575 0753                   l567 07DB                   l568 07FD                   l569 07FD  
+                 l578 0783                   l579 0797                   l951 0774                   l953 0782  
+                 l955 0783                   l957 0789                   l949 0770                   _RD0 0040  
+                 _RD1 0041                   _RD2 0042                   fsr0 0004                   indf 0000  
+                l1751 0746                  l1745 0738                  l1753 074B                  l1761 07A2  
+                l1747 073D                  l1755 0750                  l1771 07C0                  l1763 07A8  
+                l1749 0742                  l1781 07E4                  l1773 07C8                  l1765 07AE  
+                l1757 0798                  l1783 07E9                  l1775 07CC                  l1767 07B4  
+                l1759 079C                  l1785 07EF                  l1777 07DA                  l1769 07BA  
+                l1779 07DB                  u2160 07D9                  u2161 07D8                  u2170 07FC  
+                u2171 07FB                  u2165 07D5                  u2175 07F8                  _main 0798  
+                btemp 007E                  start 0000                 ?_main 0070                 _TRISB 0086  
+               _TRISD 0088       __end_of_lcddata 0754                 _delay 0770                 main@a 0072  
+               main@j 0076                 status 0003                 wtemp0 007E          __end_of_main 0800  
+              ??_main 0072                ?_delay 0070                _lcdcmd 0738             ??_lcddata 0072  
+        __pdataCOMMON 0078        __pcstackCOMMON 0070         __end_of_delay 0798               ??_delay 0070  
+          __pmaintext 0798               ?_lcdcmd 0070       __size_of_lcdcmd 000E            delay@k_321 0070  
+             _lcddata 0746               lcdcmd@a 0070  end_of_initialization 076C         __pidataCOMMON 0734  
+      __end_of_lcdcmd 0746   start_initialization 0754              ??_lcdcmd 0072              ?_lcddata 0070  
+      __size_of_delay 0028      __size_of_lcddata 000E              __ptext80 0738              __ptext81 0770  
+            __ptext82 0000              __ptext79 0746         __size_of_main 0068              main@F517 0078  
+            lcddata@a 0070  
