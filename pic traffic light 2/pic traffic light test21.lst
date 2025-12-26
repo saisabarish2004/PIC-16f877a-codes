@@ -1,0 +1,1941 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.80 build 6738 
+                                                                                               Sun Jan 28 18:16:40 2024
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 6738
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 6738"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay
+    43                           	FNCALL	_main,_redgreen
+    44                           	FNCALL	_main,_yellow
+    45                           	FNCALL	_yellow,___awmod
+    46                           	FNCALL	_yellow,_delay
+    47                           	FNCALL	_yellow,___awdiv
+    48                           	FNCALL	_redgreen,___awmod
+    49                           	FNCALL	_redgreen,_delay
+    50                           	FNCALL	_redgreen,___awdiv
+    51                           	FNROOT	_main
+    52                           	global	redgreen@F517
+    53                           	global	yellow@F521
+    54                           psect	idataBANK0,class=CODE,space=0,delta=2
+    55                           global __pidataBANK0
+    56  0537                     __pidataBANK0:
+    57                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+    58                           	line	59
+    59                           
+    60                           ;initializer for redgreen@F517
+    61  0537  343F               	retlw	03Fh
+    62  0538  3406               	retlw	06h
+    63  0539  345B               	retlw	05Bh
+    64  053A  344F               	retlw	04Fh
+    65  053B  3466               	retlw	066h
+    66  053C  346D               	retlw	06Dh
+    67  053D  347D               	retlw	07Dh
+    68  053E  3407               	retlw	07h
+    69  053F  347F               	retlw	07Fh
+    70  0540  346F               	retlw	06Fh
+    71                           	line	79
+    72                           
+    73                           ;initializer for yellow@F521
+    74  0541  343F               	retlw	03Fh
+    75  0542  3406               	retlw	06h
+    76  0543  345B               	retlw	05Bh
+    77  0544  344F               	retlw	04Fh
+    78  0545  3466               	retlw	066h
+    79  0546  346D               	retlw	06Dh
+    80  0547  347D               	retlw	07Dh
+    81  0548  3407               	retlw	07h
+    82  0549  347F               	retlw	07Fh
+    83  054A  346F               	retlw	06Fh
+    84                           	global	_PORTB
+    85  0006                     _PORTB	set	6
+    86                           	global	_PORTC
+    87  0007                     _PORTC	set	7
+    88                           	global	_PORTD
+    89  0008                     _PORTD	set	8
+    90                           	global	_RD0
+    91  0040                     _RD0	set	64
+    92                           	global	_RD1
+    93  0041                     _RD1	set	65
+    94                           	global	_TRISB
+    95  0086                     _TRISB	set	134
+    96                           	global	_TRISC
+    97  0087                     _TRISC	set	135
+    98                           	global	_TRISD
+    99  0088                     _TRISD	set	136
+   100                           	file	"pic traffic light test21.as"
+   101                           	line	#
+   102                           psect cinit,class=CODE,delta=2
+   103                           global start_initialization
+   104  0525                     start_initialization:
+   105                           
+   106                           psect	dataBANK0,class=BANK0,space=1
+   107                           global __pdataBANK0
+   108  0020                     __pdataBANK0:
+   109                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   110                           	line	59
+   111  0020                     redgreen@F517:
+   112  0020                            ds      10
+   113                           
+   114                           psect	dataBANK0
+   115                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   116                           	line	79
+   117  002A                     yellow@F521:
+   118  002A                            ds      10
+   119                           
+   120                           global btemp
+   121                           psect inittext,class=CODE,delta=2
+   122                           global init_fetch,btemp
+   123                           ;	Called with low address in FSR and high address in W
+   124  0514                     init_fetch:
+   125  0514  087E               	movf btemp,w
+   126  0515  008A               	movwf pclath
+   127  0516  087F               	movf btemp+1,w
+   128  0517  0082               	movwf pc
+   129                           global init_ram
+   130                           ;Called with:
+   131                           ;	high address of idata address in btemp 
+   132                           ;	low address of idata address in btemp+1 
+   133                           ;	low address of data in FSR
+   134                           ;	high address + 1 of data in btemp-1
+   135  0518                     init_ram:
+   136  0518  2514  120A  118A   	fcall init_fetch
+   137  051B  0080               	movwf indf,f
+   138  051C  0A84               	incf fsr,f
+   139  051D  0804               	movf fsr,w
+   140  051E  067D               	xorwf btemp-1,w
+   141  051F  1903               	btfsc status,2
+   142  0520  3400               	retlw 0
+   143  0521  0AFF               	incf btemp+1,f
+   144  0522  1903               	btfsc status,2
+   145  0523  0AFE               	incf btemp,f
+   146  0524  2D18               	goto init_ram
+   147                           ; Initialize objects allocated to BANK0
+   148                           psect cinit,class=CODE,delta=2
+   149                           global init_ram, __pidataBANK0
+   150  0525  1383               	bcf	status, 7	;select IRP bank0
+   151  0526  3034               	movlw low(__pdataBANK0+20)
+   152  0527  00FD               	movwf btemp-1,f
+   153  0528  3005               	movlw high(__pidataBANK0)
+   154  0529  00FE               	movwf btemp,f
+   155  052A  3037               	movlw low(__pidataBANK0)
+   156  052B  00FF               	movwf btemp+1,f
+   157  052C  3020               	movlw low(__pdataBANK0)
+   158  052D  0084               	movwf fsr,f
+   159  052E  120A  118A  2518   	fcall init_ram
+              120A  118A         
+   160                           psect cinit,class=CODE,delta=2
+   161                           global end_of_initialization
+   162                           
+   163                           ;End of C runtime variable initialization code
+   164                           
+   165  0533                     end_of_initialization:
+   166  0533  0183               clrf status
+   167  0534  120A  118A  2F70   ljmp _main	;jump to C main() function
+   168                           psect	cstackCOMMON,class=COMMON,space=1
+   169                           global __pcstackCOMMON
+   170  0070                     __pcstackCOMMON:
+   171                           	global	?_delay
+   172  0070                     ?_delay:	; 0 bytes @ 0x0
+   173                           	global	??_delay
+   174  0070                     ??_delay:	; 0 bytes @ 0x0
+   175                           	global	?_redgreen
+   176  0070                     ?_redgreen:	; 0 bytes @ 0x0
+   177                           	global	?_yellow
+   178  0070                     ?_yellow:	; 0 bytes @ 0x0
+   179                           	global	?_main
+   180  0070                     ?_main:	; 0 bytes @ 0x0
+   181                           	global	?___awdiv
+   182  0070                     ?___awdiv:	; 2 bytes @ 0x0
+   183                           	global	?___awmod
+   184  0070                     ?___awmod:	; 2 bytes @ 0x0
+   185                           	global	delay@k
+   186  0070                     delay@k:	; 2 bytes @ 0x0
+   187                           	global	___awdiv@divisor
+   188  0070                     ___awdiv@divisor:	; 2 bytes @ 0x0
+   189                           	global	___awmod@divisor
+   190  0070                     ___awmod@divisor:	; 2 bytes @ 0x0
+   191  0070                     	ds	2
+   192                           	global	___awdiv@dividend
+   193  0072                     ___awdiv@dividend:	; 2 bytes @ 0x2
+   194                           	global	___awmod@dividend
+   195  0072                     ___awmod@dividend:	; 2 bytes @ 0x2
+   196  0072                     	ds	2
+   197                           	global	??___awdiv
+   198  0074                     ??___awdiv:	; 0 bytes @ 0x4
+   199                           	global	??___awmod
+   200  0074                     ??___awmod:	; 0 bytes @ 0x4
+   201  0074                     	ds	1
+   202                           	global	___awdiv@counter
+   203  0075                     ___awdiv@counter:	; 1 bytes @ 0x5
+   204                           	global	___awmod@counter
+   205  0075                     ___awmod@counter:	; 1 bytes @ 0x5
+   206  0075                     	ds	1
+   207                           	global	___awdiv@sign
+   208  0076                     ___awdiv@sign:	; 1 bytes @ 0x6
+   209                           	global	___awmod@sign
+   210  0076                     ___awmod@sign:	; 1 bytes @ 0x6
+   211  0076                     	ds	1
+   212                           	global	___awdiv@quotient
+   213  0077                     ___awdiv@quotient:	; 2 bytes @ 0x7
+   214  0077                     	ds	2
+   215                           	global	??_redgreen
+   216  0079                     ??_redgreen:	; 0 bytes @ 0x9
+   217                           	global	??_yellow
+   218  0079                     ??_yellow:	; 0 bytes @ 0x9
+   219  0079                     	ds	4
+   220                           	global	??_main
+   221  007D                     ??_main:	; 0 bytes @ 0xD
+   222                           psect	cstackBANK0,class=BANK0,space=1
+   223                           global __pcstackBANK0
+   224  0034                     __pcstackBANK0:
+   225                           	global	redgreen@segcmd
+   226  0034                     redgreen@segcmd:	; 10 bytes @ 0x0
+   227                           	global	yellow@segcmd
+   228  0034                     yellow@segcmd:	; 10 bytes @ 0x0
+   229  0034                     	ds	10
+   230                           	global	redgreen@i
+   231  003E                     redgreen@i:	; 2 bytes @ 0xA
+   232                           	global	yellow@i
+   233  003E                     yellow@i:	; 2 bytes @ 0xA
+   234  003E                     	ds	2
+   235                           	global	redgreen@j
+   236  0040                     redgreen@j:	; 2 bytes @ 0xC
+   237                           	global	yellow@j
+   238  0040                     yellow@j:	; 2 bytes @ 0xC
+   239  0040                     	ds	2
+   240 ;;Data sizes: Strings 0, constant 0, data 20, bss 0, persistent 0 stack 0
+   241 ;;Auto spaces:   Size  Autos    Used
+   242 ;; COMMON          14     13      13
+   243 ;; BANK0           80     14      34
+   244 ;; BANK1           80      0       0
+   245 ;; BANK3           96      0       0
+   246 ;; BANK2           96      0       0
+   247                           
+   248 ;;
+   249 ;; Pointer list with targets:
+   250                           
+   251 ;; ?___awdiv	int  size(1) Largest target is 0
+   252 ;;
+   253 ;; ?___awmod	int  size(1) Largest target is 0
+   254 ;;
+   255                           
+   256                           
+   257 ;;
+   258 ;; Critical Paths under _main in COMMON
+   259 ;;
+   260 ;;   _main->_redgreen
+   261 ;;   _main->_yellow
+   262 ;;   _yellow->___awdiv
+   263 ;;   _redgreen->___awdiv
+   264 ;;
+   265 ;; Critical Paths under _main in BANK0
+   266 ;;
+   267 ;;   _main->_redgreen
+   268 ;;   _main->_yellow
+   269 ;;
+   270 ;; Critical Paths under _main in BANK1
+   271 ;;
+   272 ;;   None.
+   273 ;;
+   274 ;; Critical Paths under _main in BANK3
+   275 ;;
+   276 ;;   None.
+   277 ;;
+   278 ;; Critical Paths under _main in BANK2
+   279 ;;
+   280 ;;   None.
+   281                           
+   282 ;;
+   283 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   284 ;;
+   285                           
+   286 ;;
+   287 ;;Call Graph Tables:
+   288 ;;
+   289 ;; ---------------------------------------------------------------------------------
+   290 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   291 ;; ---------------------------------------------------------------------------------
+   292 ;; (0) _main                                                 0     0      0    1696
+   293 ;;                              _delay
+   294 ;;                           _redgreen
+   295 ;;                             _yellow
+   296 ;; ---------------------------------------------------------------------------------
+   297 ;; (1) _yellow                                              18    18      0     825
+   298 ;;                                              9 COMMON     4     4      0
+   299 ;;                                              0 BANK0     14    14      0
+   300 ;;                            ___awmod
+   301 ;;                              _delay
+   302 ;;                            ___awdiv
+   303 ;; ---------------------------------------------------------------------------------
+   304 ;; (1) _redgreen                                            18    18      0     825
+   305 ;;                                              9 COMMON     4     4      0
+   306 ;;                                              0 BANK0     14    14      0
+   307 ;;                            ___awmod
+   308 ;;                              _delay
+   309 ;;                            ___awdiv
+   310 ;; ---------------------------------------------------------------------------------
+   311 ;; (2) ___awmod                                              7     3      4     296
+   312 ;;                                              0 COMMON     7     3      4
+   313 ;; ---------------------------------------------------------------------------------
+   314 ;; (2) ___awdiv                                              9     5      4     300
+   315 ;;                                              0 COMMON     9     5      4
+   316 ;; ---------------------------------------------------------------------------------
+   317 ;; (2) _delay                                                2     2      0      46
+   318 ;;                                              0 COMMON     2     2      0
+   319 ;; ---------------------------------------------------------------------------------
+   320 ;; Estimated maximum stack depth 2
+   321 ;; ---------------------------------------------------------------------------------
+   322                           
+   323 ;; Call Graph Graphs:
+   324                           
+   325 ;; _main (ROOT)
+   326 ;;   _delay
+   327 ;;   _redgreen
+   328 ;;     ___awmod
+   329 ;;     _delay
+   330 ;;     ___awdiv
+   331 ;;   _yellow
+   332 ;;     ___awmod
+   333 ;;     _delay
+   334 ;;     ___awdiv
+   335 ;;
+   336                           
+   337 ;; Address spaces:
+   338                           
+   339 ;;Name               Size   Autos  Total    Cost      Usage
+   340 ;;BANK3               60      0       0       9        0.0%
+   341 ;;BITBANK3            60      0       0       8        0.0%
+   342 ;;SFR3                 0      0       0       4        0.0%
+   343 ;;BITSFR3              0      0       0       4        0.0%
+   344 ;;BANK2               60      0       0      11        0.0%
+   345 ;;BITBANK2            60      0       0      10        0.0%
+   346 ;;SFR2                 0      0       0       5        0.0%
+   347 ;;BITSFR2              0      0       0       5        0.0%
+   348 ;;SFR1                 0      0       0       2        0.0%
+   349 ;;BITSFR1              0      0       0       2        0.0%
+   350 ;;BANK1               50      0       0       7        0.0%
+   351 ;;BITBANK1            50      0       0       6        0.0%
+   352 ;;CODE                 0      0       0       0        0.0%
+   353 ;;DATA                 0      0      31      12        0.0%
+   354 ;;ABS                  0      0      2F       3        0.0%
+   355 ;;NULL                 0      0       0       0        0.0%
+   356 ;;STACK                0      0       2       2        0.0%
+   357 ;;BANK0               50      E      22       5       42.5%
+   358 ;;BITBANK0            50      0       0       4        0.0%
+   359 ;;SFR0                 0      0       0       1        0.0%
+   360 ;;BITSFR0              0      0       0       1        0.0%
+   361 ;;COMMON               E      D       D       1       92.9%
+   362 ;;BITCOMMON            E      0       0       0        0.0%
+   363 ;;EEDATA             100      0       0       0        0.0%
+   364                           
+   365                           	global	_main
+   366                           psect	maintext,global,class=CODE,delta=2
+   367                           global __pmaintext
+   368  0770                     __pmaintext:
+   369                           
+   370 ;; *************** function _main *****************
+   371 ;; Defined at:
+   372 ;;		line 6 in file "E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   373 ;; Parameters:    Size  Location     Type
+   374 ;;		None
+   375 ;; Auto vars:     Size  Location     Type
+   376 ;;		None
+   377 ;; Return value:  Size  Location     Type
+   378 ;;		None               void
+   379 ;; Registers used:
+   380 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   381 ;; Tracked objects:
+   382 ;;		On entry : 17F/0
+   383 ;;		On exit  : 0/0
+   384 ;;		Unchanged: 0/0
+   385 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   386 ;;      Params:         0       0       0       0       0
+   387 ;;      Locals:         0       0       0       0       0
+   388 ;;      Temps:          0       0       0       0       0
+   389 ;;      Totals:         0       0       0       0       0
+   390 ;;Total ram usage:        0 bytes
+   391 ;; Hardware stack levels required when called:    2
+   392 ;; This function calls:
+   393 ;;		_delay
+   394 ;;		_redgreen
+   395 ;;		_yellow
+   396 ;; This function is called by:
+   397 ;;		Startup code after reset
+   398 ;; This function uses a non-reentrant model
+   399 ;;
+   400                           psect	maintext
+   401                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   402                           	line	6
+   403                           	global	__size_of_main
+   404  0090                     	__size_of_main	equ	__end_of_main-_main
+   405                           	
+   406  0770                     _main:	
+   407                           	opt	stack 6
+   408                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   409                           	line	7
+   410                           	
+   411  0770                     l2084:	
+   412                           ;pic traffic light test31.c: 7: TRISB=0;
+   413  0770  1683               	bsf	status, 5	;RP0=1, select bank1
+   414  0771  1303               	bcf	status, 6	;RP1=0, select bank1
+   415  0772  0186               	clrf	(134)^080h	;volatile
+   416                           	line	8
+   417                           ;pic traffic light test31.c: 8: TRISD=0;
+   418  0773  0188               	clrf	(136)^080h	;volatile
+   419                           	line	9
+   420                           ;pic traffic light test31.c: 9: TRISC=0;
+   421  0774  0187               	clrf	(135)^080h	;volatile
+   422                           	line	10
+   423                           ;pic traffic light test31.c: 10: PORTC=0X00;
+   424  0775  1283               	bcf	status, 5	;RP0=0, select bank0
+   425  0776  1303               	bcf	status, 6	;RP1=0, select bank0
+   426  0777  0187               	clrf	(7)	;volatile
+   427                           	line	11
+   428                           	
+   429  0778                     l2086:	
+   430                           ;pic traffic light test31.c: 11: PORTD=0X03;
+   431  0778  3003               	movlw	(03h)
+   432  0779  0088               	movwf	(8)	;volatile
+   433  077A  2F7B               	goto	l2088
+   434                           	line	12
+   435                           ;pic traffic light test31.c: 12: while(1)
+   436                           	
+   437  077B                     l565:	
+   438                           	line	15
+   439                           	
+   440  077B                     l2088:	
+   441                           ;pic traffic light test31.c: 13: {
+   442                           ;pic traffic light test31.c: 15: PORTD=0X20;
+   443  077B  3020               	movlw	(020h)
+   444  077C  1283               	bcf	status, 5	;RP0=0, select bank0
+   445  077D  1303               	bcf	status, 6	;RP1=0, select bank0
+   446  077E  0088               	movwf	(8)	;volatile
+   447                           	line	16
+   448                           	
+   449  077F                     l2090:	
+   450                           ;pic traffic light test31.c: 16: PORTC=0X49;
+   451  077F  3049               	movlw	(049h)
+   452  0780  0087               	movwf	(7)	;volatile
+   453                           	line	17
+   454                           	
+   455  0781                     l2092:	
+   456                           ;pic traffic light test31.c: 17: delay();
+   457  0781  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   458                           	line	18
+   459                           	
+   460  0786                     l2094:	
+   461                           ;pic traffic light test31.c: 18: redgreen();
+   462  0786  120A  118A  2656   	fcall	_redgreen
+              120A  118A         
+   463                           	line	19
+   464                           	
+   465  078B                     l2096:	
+   466                           ;pic traffic light test31.c: 19: PORTC=0XDB;
+   467  078B  30DB               	movlw	(0DBh)
+   468  078C  1283               	bcf	status, 5	;RP0=0, select bank0
+   469  078D  1303               	bcf	status, 6	;RP1=0, select bank0
+   470  078E  0087               	movwf	(7)	;volatile
+   471                           	line	20
+   472                           	
+   473  078F                     l2098:	
+   474                           ;pic traffic light test31.c: 20: PORTD=0X20;
+   475  078F  3020               	movlw	(020h)
+   476  0790  0088               	movwf	(8)	;volatile
+   477                           	line	21
+   478                           	
+   479  0791                     l2100:	
+   480                           ;pic traffic light test31.c: 21: delay();
+   481  0791  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   482                           	line	22
+   483                           	
+   484  0796                     l2102:	
+   485                           ;pic traffic light test31.c: 22: yellow();
+   486  0796  120A  118A  26E3   	fcall	_yellow
+              120A  118A         
+   487                           	line	23
+   488                           	
+   489  079B                     l2104:	
+   490                           ;pic traffic light test31.c: 23: PORTC=0X49;
+   491  079B  3049               	movlw	(049h)
+   492  079C  1283               	bcf	status, 5	;RP0=0, select bank0
+   493  079D  1303               	bcf	status, 6	;RP1=0, select bank0
+   494  079E  0087               	movwf	(7)	;volatile
+   495                           	line	24
+   496                           	
+   497  079F                     l2106:	
+   498                           ;pic traffic light test31.c: 24: PORTD=0X0C;
+   499  079F  300C               	movlw	(0Ch)
+   500  07A0  0088               	movwf	(8)	;volatile
+   501                           	line	25
+   502                           	
+   503  07A1                     l2108:	
+   504                           ;pic traffic light test31.c: 25: delay();
+   505  07A1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   506                           	line	26
+   507                           	
+   508  07A6                     l2110:	
+   509                           ;pic traffic light test31.c: 26: redgreen();
+   510  07A6  120A  118A  2656   	fcall	_redgreen
+              120A  118A         
+   511                           	line	27
+   512                           	
+   513  07AB                     l2112:	
+   514                           ;pic traffic light test31.c: 27: PORTC=0XDB;
+   515  07AB  30DB               	movlw	(0DBh)
+   516  07AC  1283               	bcf	status, 5	;RP0=0, select bank0
+   517  07AD  1303               	bcf	status, 6	;RP1=0, select bank0
+   518  07AE  0087               	movwf	(7)	;volatile
+   519                           	line	28
+   520                           	
+   521  07AF                     l2114:	
+   522                           ;pic traffic light test31.c: 28: PORTD=0X1C;
+   523  07AF  301C               	movlw	(01Ch)
+   524  07B0  0088               	movwf	(8)	;volatile
+   525                           	line	29
+   526                           	
+   527  07B1                     l2116:	
+   528                           ;pic traffic light test31.c: 29: delay();
+   529  07B1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   530                           	line	30
+   531                           	
+   532  07B6                     l2118:	
+   533                           ;pic traffic light test31.c: 30: yellow();
+   534  07B6  120A  118A  26E3   	fcall	_yellow
+              120A  118A         
+   535                           	line	31
+   536                           	
+   537  07BB                     l2120:	
+   538                           ;pic traffic light test31.c: 31: PORTC=0X45;
+   539  07BB  3045               	movlw	(045h)
+   540  07BC  1283               	bcf	status, 5	;RP0=0, select bank0
+   541  07BD  1303               	bcf	status, 6	;RP1=0, select bank0
+   542  07BE  0087               	movwf	(7)	;volatile
+   543                           	line	32
+   544                           	
+   545  07BF                     l2122:	
+   546                           ;pic traffic light test31.c: 32: PORTD=0X08;
+   547  07BF  3008               	movlw	(08h)
+   548  07C0  0088               	movwf	(8)	;volatile
+   549                           	line	33
+   550                           	
+   551  07C1                     l2124:	
+   552                           ;pic traffic light test31.c: 33: delay();
+   553  07C1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   554                           	line	34
+   555                           	
+   556  07C6                     l2126:	
+   557                           ;pic traffic light test31.c: 34: redgreen();
+   558  07C6  120A  118A  2656   	fcall	_redgreen
+              120A  118A         
+   559                           	line	35
+   560                           	
+   561  07CB                     l2128:	
+   562                           ;pic traffic light test31.c: 35: PORTC=0X07;
+   563  07CB  3007               	movlw	(07h)
+   564  07CC  1283               	bcf	status, 5	;RP0=0, select bank0
+   565  07CD  1303               	bcf	status, 6	;RP1=0, select bank0
+   566  07CE  0087               	movwf	(7)	;volatile
+   567                           	line	36
+   568                           	
+   569  07CF                     l2130:	
+   570                           ;pic traffic light test31.c: 36: PORTD=0X18;
+   571  07CF  3018               	movlw	(018h)
+   572  07D0  0088               	movwf	(8)	;volatile
+   573                           	line	37
+   574                           	
+   575  07D1                     l2132:	
+   576                           ;pic traffic light test31.c: 37: delay();
+   577  07D1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   578                           	line	38
+   579                           	
+   580  07D6                     l2134:	
+   581                           ;pic traffic light test31.c: 38: yellow();
+   582  07D6  120A  118A  26E3   	fcall	_yellow
+              120A  118A         
+   583                           	line	39
+   584                           	
+   585  07DB                     l2136:	
+   586                           ;pic traffic light test31.c: 39: PORTC=0X29;
+   587  07DB  3029               	movlw	(029h)
+   588  07DC  1283               	bcf	status, 5	;RP0=0, select bank0
+   589  07DD  1303               	bcf	status, 6	;RP1=0, select bank0
+   590  07DE  0087               	movwf	(7)	;volatile
+   591                           	line	40
+   592                           	
+   593  07DF                     l2138:	
+   594                           ;pic traffic light test31.c: 40: PORTD=0X08;
+   595  07DF  3008               	movlw	(08h)
+   596  07E0  0088               	movwf	(8)	;volatile
+   597                           	line	41
+   598                           	
+   599  07E1                     l2140:	
+   600                           ;pic traffic light test31.c: 41: delay();
+   601  07E1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   602                           	line	42
+   603                           	
+   604  07E6                     l2142:	
+   605                           ;pic traffic light test31.c: 42: redgreen();
+   606  07E6  120A  118A  2656   	fcall	_redgreen
+              120A  118A         
+   607                           	line	43
+   608                           	
+   609  07EB                     l2144:	
+   610                           ;pic traffic light test31.c: 43: PORTC=0X2B;
+   611  07EB  302B               	movlw	(02Bh)
+   612  07EC  1283               	bcf	status, 5	;RP0=0, select bank0
+   613  07ED  1303               	bcf	status, 6	;RP1=0, select bank0
+   614  07EE  0087               	movwf	(7)	;volatile
+   615                           	line	44
+   616                           	
+   617  07EF                     l2146:	
+   618                           ;pic traffic light test31.c: 44: PORTD=0X18;
+   619  07EF  3018               	movlw	(018h)
+   620  07F0  0088               	movwf	(8)	;volatile
+   621                           	line	45
+   622                           	
+   623  07F1                     l2148:	
+   624                           ;pic traffic light test31.c: 45: delay();
+   625  07F1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   626                           	line	46
+   627                           	
+   628  07F6                     l2150:	
+   629                           ;pic traffic light test31.c: 46: yellow();
+   630  07F6  120A  118A  26E3   	fcall	_yellow
+              120A  118A         
+   631  07FB  2F7B               	goto	l2088
+   632                           	line	49
+   633                           	
+   634  07FC                     l566:	
+   635                           	line	12
+   636  07FC  2F7B               	goto	l2088
+   637                           	
+   638  07FD                     l567:	
+   639                           	line	50
+   640                           	
+   641  07FD                     l568:	
+   642                           	global	start
+   643  07FD  120A  118A  2800   	ljmp	start
+   644                           	opt stack 0
+   645                           GLOBAL	__end_of_main
+   646  0800                     	__end_of_main:
+   647 ;; =============== function _main ends ============
+   648                           
+   649                           	signat	_main,88
+   650                           	global	_yellow
+   651                           psect	text143,local,class=CODE,delta=2
+   652                           global __ptext143
+   653  06E3                     __ptext143:
+   654                           
+   655 ;; *************** function _yellow *****************
+   656 ;; Defined at:
+   657 ;;		line 77 in file "E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   658 ;; Parameters:    Size  Location     Type
+   659 ;;		None
+   660 ;; Auto vars:     Size  Location     Type
+   661 ;;  segcmd         10    0[BANK0 ] unsigned char [10]
+   662 ;;  j               2   12[BANK0 ] int 
+   663 ;;  i               2   10[BANK0 ] int 
+   664 ;; Return value:  Size  Location     Type
+   665 ;;		None               void
+   666 ;; Registers used:
+   667 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   668 ;; Tracked objects:
+   669 ;;		On entry : 0/0
+   670 ;;		On exit  : 0/0
+   671 ;;		Unchanged: 0/0
+   672 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   673 ;;      Params:         0       0       0       0       0
+   674 ;;      Locals:         0      14       0       0       0
+   675 ;;      Temps:          4       0       0       0       0
+   676 ;;      Totals:         4      14       0       0       0
+   677 ;;Total ram usage:       18 bytes
+   678 ;; Hardware stack levels used:    1
+   679 ;; Hardware stack levels required when called:    1
+   680 ;; This function calls:
+   681 ;;		___awmod
+   682 ;;		_delay
+   683 ;;		___awdiv
+   684 ;; This function is called by:
+   685 ;;		_main
+   686 ;; This function uses a non-reentrant model
+   687 ;;
+   688                           psect	text143
+   689                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   690                           	line	77
+   691                           	global	__size_of_yellow
+   692  008D                     	__size_of_yellow	equ	__end_of_yellow-_yellow
+   693                           	
+   694  06E3                     _yellow:	
+   695                           	opt	stack 6
+   696                           ; Regs used in _yellow: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   697                           	line	79
+   698                           	
+   699  06E3                     l2054:	
+   700                           ;pic traffic light test31.c: 78: int i,j;
+   701                           ;pic traffic light test31.c: 79: char segcmd[10]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X0
+                                 7,0X7F,0X6F};
+   702  06E3  3034               	movlw	(yellow@segcmd)&0ffh
+   703  06E4  0084               	movwf	fsr0
+   704  06E5  302A               	movlw	low(yellow@F521)
+   705  06E6  00F9               	movwf	(??_yellow+0)+0
+   706  06E7  0804               	movf	fsr0,w
+   707  06E8  00FA               	movwf	((??_yellow+0)+0+1)
+   708  06E9  300A               	movlw	10
+   709  06EA  00FB               	movwf	((??_yellow+0)+0+2)
+   710  06EB                     u2460:
+   711  06EB  0879               	movf	(??_yellow+0)+0,w
+   712  06EC  0084               	movwf	fsr0
+   713  06ED  1383               	bcf	status, 7	;select IRP bank0
+   714                           	
+   715  06EE  0800               	movf	indf,w
+   716  06EF  00FC               	movwf	((??_yellow+0)+0+3)
+   717  06F0  0AF9               	incf	(??_yellow+0)+0,f
+   718  06F1  087A               	movf	((??_yellow+0)+0+1),w
+   719  06F2  0084               	movwf	fsr0
+   720                           	
+   721  06F3  087C               	movf	((??_yellow+0)+0+3),w
+   722  06F4  0080               	movwf	indf
+   723  06F5  0AFA               	incf	((??_yellow+0)+0+1),f
+   724  06F6  0BFB               	decfsz	((??_yellow+0)+0+2),f
+   725  06F7  2EEB               	goto	u2460
+   726                           	line	80
+   727                           	
+   728  06F8                     l2056:	
+   729                           ;pic traffic light test31.c: 80: for (j=0;j<=5;j++)
+   730  06F8  3000               	movlw	low(0)
+   731  06F9  1283               	bcf	status, 5	;RP0=0, select bank0
+   732  06FA  1303               	bcf	status, 6	;RP1=0, select bank0
+   733  06FB  00C0               	movwf	(yellow@j)
+   734  06FC  3000               	movlw	high(0)
+   735  06FD  00C1               	movwf	((yellow@j))+1
+   736                           	
+   737  06FE                     l2058:	
+   738  06FE  0841               	movf	(yellow@j+1),w
+   739  06FF  3A80               	xorlw	80h
+   740  0700  00FF               	movwf	btemp+1
+   741  0701  3080               	movlw	(high(06h))^80h
+   742  0702  027F               	subwf	btemp+1,w
+   743  0703  1D03               	skipz
+   744  0704  2F07               	goto	u2475
+   745  0705  3006               	movlw	low(06h)
+   746  0706  0240               	subwf	(yellow@j),w
+   747  0707                     u2475:
+   748                           
+   749  0707  1C03               	skipc
+   750  0708  2F0A               	goto	u2471
+   751  0709  2F0B               	goto	u2470
+   752  070A                     u2471:
+   753  070A  2F0D               	goto	l2062
+   754  070B                     u2470:
+   755  070B  2F6F               	goto	l582
+   756                           	
+   757  070C                     l2060:	
+   758  070C  2F6F               	goto	l582
+   759                           	line	81
+   760                           	
+   761  070D                     l580:	
+   762                           	line	82
+   763                           	
+   764  070D                     l2062:	
+   765                           ;pic traffic light test31.c: 81: {
+   766                           ;pic traffic light test31.c: 82: i=j%10;
+   767  070D  300A               	movlw	low(0Ah)
+   768  070E  00F0               	movwf	(?___awmod)
+   769  070F  3000               	movlw	high(0Ah)
+   770  0710  00F1               	movwf	((?___awmod))+1
+   771  0711  1283               	bcf	status, 5	;RP0=0, select bank0
+   772  0712  1303               	bcf	status, 6	;RP1=0, select bank0
+   773  0713  0841               	movf	(yellow@j+1),w
+   774  0714  01F3               	clrf	1+(?___awmod)+02h
+   775  0715  07F3               	addwf	1+(?___awmod)+02h
+   776  0716  0840               	movf	(yellow@j),w
+   777  0717  01F2               	clrf	0+(?___awmod)+02h
+   778  0718  07F2               	addwf	0+(?___awmod)+02h
+   779                           
+   780  0719  120A  118A  2573   	fcall	___awmod
+              120A  118A         
+   781  071E  0871               	movf	(1+(?___awmod)),w
+   782  071F  1283               	bcf	status, 5	;RP0=0, select bank0
+   783  0720  1303               	bcf	status, 6	;RP1=0, select bank0
+   784  0721  01BF               	clrf	(yellow@i+1)
+   785  0722  07BF               	addwf	(yellow@i+1)
+   786  0723  0870               	movf	(0+(?___awmod)),w
+   787  0724  01BE               	clrf	(yellow@i)
+   788  0725  07BE               	addwf	(yellow@i)
+   789                           
+   790                           	line	83
+   791                           	
+   792  0726                     l2064:	
+   793                           ;pic traffic light test31.c: 83: RD0=1;
+   794  0726  1408               	bsf	(64/8),(64)&7
+   795                           	line	84
+   796                           	
+   797  0727                     l2066:	
+   798                           ;pic traffic light test31.c: 84: RD1=0;
+   799  0727  1088               	bcf	(65/8),(65)&7
+   800                           	line	85
+   801                           	
+   802  0728                     l2068:	
+   803                           ;pic traffic light test31.c: 85: PORTB=segcmd[i];
+   804  0728  083E               	movf	(yellow@i),w
+   805  0729  3E34               	addlw	yellow@segcmd&0ffh
+   806  072A  0084               	movwf	fsr0
+   807  072B  1383               	bcf	status, 7	;select IRP bank0
+   808  072C  0800               	movf	indf,w
+   809  072D  0086               	movwf	(6)	;volatile
+   810                           	line	86
+   811                           	
+   812  072E                     l2070:	
+   813                           ;pic traffic light test31.c: 86: delay();
+   814  072E  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   815                           	line	87
+   816                           	
+   817  0733                     l2072:	
+   818                           ;pic traffic light test31.c: 87: i=j/10;
+   819  0733  300A               	movlw	low(0Ah)
+   820  0734  00F0               	movwf	(?___awdiv)
+   821  0735  3000               	movlw	high(0Ah)
+   822  0736  00F1               	movwf	((?___awdiv))+1
+   823  0737  1283               	bcf	status, 5	;RP0=0, select bank0
+   824  0738  1303               	bcf	status, 6	;RP1=0, select bank0
+   825  0739  0841               	movf	(yellow@j+1),w
+   826  073A  01F3               	clrf	1+(?___awdiv)+02h
+   827  073B  07F3               	addwf	1+(?___awdiv)+02h
+   828  073C  0840               	movf	(yellow@j),w
+   829  073D  01F2               	clrf	0+(?___awdiv)+02h
+   830  073E  07F2               	addwf	0+(?___awdiv)+02h
+   831                           
+   832  073F  120A  118A  25DD   	fcall	___awdiv
+              120A  118A         
+   833  0744  0871               	movf	(1+(?___awdiv)),w
+   834  0745  1283               	bcf	status, 5	;RP0=0, select bank0
+   835  0746  1303               	bcf	status, 6	;RP1=0, select bank0
+   836  0747  01BF               	clrf	(yellow@i+1)
+   837  0748  07BF               	addwf	(yellow@i+1)
+   838  0749  0870               	movf	(0+(?___awdiv)),w
+   839  074A  01BE               	clrf	(yellow@i)
+   840  074B  07BE               	addwf	(yellow@i)
+   841                           
+   842                           	line	88
+   843                           	
+   844  074C                     l2074:	
+   845                           ;pic traffic light test31.c: 88: RD0=0;
+   846  074C  1008               	bcf	(64/8),(64)&7
+   847                           	line	89
+   848                           	
+   849  074D                     l2076:	
+   850                           ;pic traffic light test31.c: 89: RD1=1;
+   851  074D  1488               	bsf	(65/8),(65)&7
+   852                           	line	90
+   853                           	
+   854  074E                     l2078:	
+   855                           ;pic traffic light test31.c: 90: PORTB =segcmd[i];
+   856  074E  083E               	movf	(yellow@i),w
+   857  074F  3E34               	addlw	yellow@segcmd&0ffh
+   858  0750  0084               	movwf	fsr0
+   859  0751  1383               	bcf	status, 7	;select IRP bank0
+   860  0752  0800               	movf	indf,w
+   861  0753  0086               	movwf	(6)	;volatile
+   862                           	line	91
+   863                           ;pic traffic light test31.c: 91: delay();
+   864  0754  120A  118A  254B   	fcall	_delay
+              120A  118A         
+   865                           	line	80
+   866                           	
+   867  0759                     l2080:	
+   868  0759  3001               	movlw	low(01h)
+   869  075A  1283               	bcf	status, 5	;RP0=0, select bank0
+   870  075B  1303               	bcf	status, 6	;RP1=0, select bank0
+   871  075C  07C0               	addwf	(yellow@j),f
+   872  075D  1803               	skipnc
+   873  075E  0AC1               	incf	(yellow@j+1),f
+   874  075F  3000               	movlw	high(01h)
+   875  0760  07C1               	addwf	(yellow@j+1),f
+   876                           	
+   877  0761                     l2082:	
+   878  0761  0841               	movf	(yellow@j+1),w
+   879  0762  3A80               	xorlw	80h
+   880  0763  00FF               	movwf	btemp+1
+   881  0764  3080               	movlw	(high(06h))^80h
+   882  0765  027F               	subwf	btemp+1,w
+   883  0766  1D03               	skipz
+   884  0767  2F6A               	goto	u2485
+   885  0768  3006               	movlw	low(06h)
+   886  0769  0240               	subwf	(yellow@j),w
+   887  076A                     u2485:
+   888                           
+   889  076A  1C03               	skipc
+   890  076B  2F6D               	goto	u2481
+   891  076C  2F6E               	goto	u2480
+   892  076D                     u2481:
+   893  076D  2F0D               	goto	l2062
+   894  076E                     u2480:
+   895  076E  2F6F               	goto	l582
+   896                           	
+   897  076F                     l581:	
+   898                           	line	93
+   899                           	
+   900  076F                     l582:	
+   901  076F  0008               	return
+   902                           	opt stack 0
+   903                           GLOBAL	__end_of_yellow
+   904  0770                     	__end_of_yellow:
+   905 ;; =============== function _yellow ends ============
+   906                           
+   907                           	signat	_yellow,88
+   908                           	global	_redgreen
+   909                           psect	text144,local,class=CODE,delta=2
+   910                           global __ptext144
+   911  0656                     __ptext144:
+   912                           
+   913 ;; *************** function _redgreen *****************
+   914 ;; Defined at:
+   915 ;;		line 57 in file "E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   916 ;; Parameters:    Size  Location     Type
+   917 ;;		None
+   918 ;; Auto vars:     Size  Location     Type
+   919 ;;  segcmd         10    0[BANK0 ] unsigned char [10]
+   920 ;;  j               2   12[BANK0 ] int 
+   921 ;;  i               2   10[BANK0 ] int 
+   922 ;; Return value:  Size  Location     Type
+   923 ;;		None               void
+   924 ;; Registers used:
+   925 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   926 ;; Tracked objects:
+   927 ;;		On entry : 0/0
+   928 ;;		On exit  : 0/0
+   929 ;;		Unchanged: 0/0
+   930 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   931 ;;      Params:         0       0       0       0       0
+   932 ;;      Locals:         0      14       0       0       0
+   933 ;;      Temps:          4       0       0       0       0
+   934 ;;      Totals:         4      14       0       0       0
+   935 ;;Total ram usage:       18 bytes
+   936 ;; Hardware stack levels used:    1
+   937 ;; Hardware stack levels required when called:    1
+   938 ;; This function calls:
+   939 ;;		___awmod
+   940 ;;		_delay
+   941 ;;		___awdiv
+   942 ;; This function is called by:
+   943 ;;		_main
+   944 ;; This function uses a non-reentrant model
+   945 ;;
+   946                           psect	text144
+   947                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+   948                           	line	57
+   949                           	global	__size_of_redgreen
+   950  008D                     	__size_of_redgreen	equ	__end_of_redgreen-_redgreen
+   951                           	
+   952  0656                     _redgreen:	
+   953                           	opt	stack 6
+   954                           ; Regs used in _redgreen: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   955                           	line	59
+   956                           	
+   957  0656                     l2024:	
+   958                           ;pic traffic light test31.c: 58: int i,j;
+   959                           ;pic traffic light test31.c: 59: char segcmd[10]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X0
+                                 7,0X7F,0X6F};
+   960  0656  3034               	movlw	(redgreen@segcmd)&0ffh
+   961  0657  0084               	movwf	fsr0
+   962  0658  3020               	movlw	low(redgreen@F517)
+   963  0659  00F9               	movwf	(??_redgreen+0)+0
+   964  065A  0804               	movf	fsr0,w
+   965  065B  00FA               	movwf	((??_redgreen+0)+0+1)
+   966  065C  300A               	movlw	10
+   967  065D  00FB               	movwf	((??_redgreen+0)+0+2)
+   968  065E                     u2430:
+   969  065E  0879               	movf	(??_redgreen+0)+0,w
+   970  065F  0084               	movwf	fsr0
+   971  0660  1383               	bcf	status, 7	;select IRP bank0
+   972                           	
+   973  0661  0800               	movf	indf,w
+   974  0662  00FC               	movwf	((??_redgreen+0)+0+3)
+   975  0663  0AF9               	incf	(??_redgreen+0)+0,f
+   976  0664  087A               	movf	((??_redgreen+0)+0+1),w
+   977  0665  0084               	movwf	fsr0
+   978                           	
+   979  0666  087C               	movf	((??_redgreen+0)+0+3),w
+   980  0667  0080               	movwf	indf
+   981  0668  0AFA               	incf	((??_redgreen+0)+0+1),f
+   982  0669  0BFB               	decfsz	((??_redgreen+0)+0+2),f
+   983  066A  2E5E               	goto	u2430
+   984                           	line	60
+   985                           	
+   986  066B                     l2026:	
+   987                           ;pic traffic light test31.c: 60: for (j=0;j<=10;j++)
+   988  066B  3000               	movlw	low(0)
+   989  066C  1283               	bcf	status, 5	;RP0=0, select bank0
+   990  066D  1303               	bcf	status, 6	;RP1=0, select bank0
+   991  066E  00C0               	movwf	(redgreen@j)
+   992  066F  3000               	movlw	high(0)
+   993  0670  00C1               	movwf	((redgreen@j))+1
+   994                           	
+   995  0671                     l2028:	
+   996  0671  0841               	movf	(redgreen@j+1),w
+   997  0672  3A80               	xorlw	80h
+   998  0673  00FF               	movwf	btemp+1
+   999  0674  3080               	movlw	(high(0Bh))^80h
+  1000  0675  027F               	subwf	btemp+1,w
+  1001  0676  1D03               	skipz
+  1002  0677  2E7A               	goto	u2445
+  1003  0678  300B               	movlw	low(0Bh)
+  1004  0679  0240               	subwf	(redgreen@j),w
+  1005  067A                     u2445:
+  1006                           
+  1007  067A  1C03               	skipc
+  1008  067B  2E7D               	goto	u2441
+  1009  067C  2E7E               	goto	u2440
+  1010  067D                     u2441:
+  1011  067D  2E80               	goto	l2032
+  1012  067E                     u2440:
+  1013  067E  2EE2               	goto	l575
+  1014                           	
+  1015  067F                     l2030:	
+  1016  067F  2EE2               	goto	l575
+  1017                           	line	61
+  1018                           	
+  1019  0680                     l573:	
+  1020                           	line	62
+  1021                           	
+  1022  0680                     l2032:	
+  1023                           ;pic traffic light test31.c: 61: {
+  1024                           ;pic traffic light test31.c: 62: i=j%10;
+  1025  0680  300A               	movlw	low(0Ah)
+  1026  0681  00F0               	movwf	(?___awmod)
+  1027  0682  3000               	movlw	high(0Ah)
+  1028  0683  00F1               	movwf	((?___awmod))+1
+  1029  0684  1283               	bcf	status, 5	;RP0=0, select bank0
+  1030  0685  1303               	bcf	status, 6	;RP1=0, select bank0
+  1031  0686  0841               	movf	(redgreen@j+1),w
+  1032  0687  01F3               	clrf	1+(?___awmod)+02h
+  1033  0688  07F3               	addwf	1+(?___awmod)+02h
+  1034  0689  0840               	movf	(redgreen@j),w
+  1035  068A  01F2               	clrf	0+(?___awmod)+02h
+  1036  068B  07F2               	addwf	0+(?___awmod)+02h
+  1037                           
+  1038  068C  120A  118A  2573   	fcall	___awmod
+              120A  118A         
+  1039  0691  0871               	movf	(1+(?___awmod)),w
+  1040  0692  1283               	bcf	status, 5	;RP0=0, select bank0
+  1041  0693  1303               	bcf	status, 6	;RP1=0, select bank0
+  1042  0694  01BF               	clrf	(redgreen@i+1)
+  1043  0695  07BF               	addwf	(redgreen@i+1)
+  1044  0696  0870               	movf	(0+(?___awmod)),w
+  1045  0697  01BE               	clrf	(redgreen@i)
+  1046  0698  07BE               	addwf	(redgreen@i)
+  1047                           
+  1048                           	line	63
+  1049                           	
+  1050  0699                     l2034:	
+  1051                           ;pic traffic light test31.c: 63: RD0=1;
+  1052  0699  1408               	bsf	(64/8),(64)&7
+  1053                           	line	64
+  1054                           	
+  1055  069A                     l2036:	
+  1056                           ;pic traffic light test31.c: 64: RD1=0;
+  1057  069A  1088               	bcf	(65/8),(65)&7
+  1058                           	line	65
+  1059                           	
+  1060  069B                     l2038:	
+  1061                           ;pic traffic light test31.c: 65: PORTB=segcmd[i];
+  1062  069B  083E               	movf	(redgreen@i),w
+  1063  069C  3E34               	addlw	redgreen@segcmd&0ffh
+  1064  069D  0084               	movwf	fsr0
+  1065  069E  1383               	bcf	status, 7	;select IRP bank0
+  1066  069F  0800               	movf	indf,w
+  1067  06A0  0086               	movwf	(6)	;volatile
+  1068                           	line	66
+  1069                           	
+  1070  06A1                     l2040:	
+  1071                           ;pic traffic light test31.c: 66: delay();
+  1072  06A1  120A  118A  254B   	fcall	_delay
+              120A  118A         
+  1073                           	line	67
+  1074                           	
+  1075  06A6                     l2042:	
+  1076                           ;pic traffic light test31.c: 67: i=j/10;
+  1077  06A6  300A               	movlw	low(0Ah)
+  1078  06A7  00F0               	movwf	(?___awdiv)
+  1079  06A8  3000               	movlw	high(0Ah)
+  1080  06A9  00F1               	movwf	((?___awdiv))+1
+  1081  06AA  1283               	bcf	status, 5	;RP0=0, select bank0
+  1082  06AB  1303               	bcf	status, 6	;RP1=0, select bank0
+  1083  06AC  0841               	movf	(redgreen@j+1),w
+  1084  06AD  01F3               	clrf	1+(?___awdiv)+02h
+  1085  06AE  07F3               	addwf	1+(?___awdiv)+02h
+  1086  06AF  0840               	movf	(redgreen@j),w
+  1087  06B0  01F2               	clrf	0+(?___awdiv)+02h
+  1088  06B1  07F2               	addwf	0+(?___awdiv)+02h
+  1089                           
+  1090  06B2  120A  118A  25DD   	fcall	___awdiv
+              120A  118A         
+  1091  06B7  0871               	movf	(1+(?___awdiv)),w
+  1092  06B8  1283               	bcf	status, 5	;RP0=0, select bank0
+  1093  06B9  1303               	bcf	status, 6	;RP1=0, select bank0
+  1094  06BA  01BF               	clrf	(redgreen@i+1)
+  1095  06BB  07BF               	addwf	(redgreen@i+1)
+  1096  06BC  0870               	movf	(0+(?___awdiv)),w
+  1097  06BD  01BE               	clrf	(redgreen@i)
+  1098  06BE  07BE               	addwf	(redgreen@i)
+  1099                           
+  1100                           	line	68
+  1101                           	
+  1102  06BF                     l2044:	
+  1103                           ;pic traffic light test31.c: 68: RD0=0;
+  1104  06BF  1008               	bcf	(64/8),(64)&7
+  1105                           	line	69
+  1106                           	
+  1107  06C0                     l2046:	
+  1108                           ;pic traffic light test31.c: 69: RD1=1;
+  1109  06C0  1488               	bsf	(65/8),(65)&7
+  1110                           	line	70
+  1111                           	
+  1112  06C1                     l2048:	
+  1113                           ;pic traffic light test31.c: 70: PORTB =segcmd[i];
+  1114  06C1  083E               	movf	(redgreen@i),w
+  1115  06C2  3E34               	addlw	redgreen@segcmd&0ffh
+  1116  06C3  0084               	movwf	fsr0
+  1117  06C4  1383               	bcf	status, 7	;select IRP bank0
+  1118  06C5  0800               	movf	indf,w
+  1119  06C6  0086               	movwf	(6)	;volatile
+  1120                           	line	71
+  1121                           ;pic traffic light test31.c: 71: delay();
+  1122  06C7  120A  118A  254B   	fcall	_delay
+              120A  118A         
+  1123                           	line	60
+  1124                           	
+  1125  06CC                     l2050:	
+  1126  06CC  3001               	movlw	low(01h)
+  1127  06CD  1283               	bcf	status, 5	;RP0=0, select bank0
+  1128  06CE  1303               	bcf	status, 6	;RP1=0, select bank0
+  1129  06CF  07C0               	addwf	(redgreen@j),f
+  1130  06D0  1803               	skipnc
+  1131  06D1  0AC1               	incf	(redgreen@j+1),f
+  1132  06D2  3000               	movlw	high(01h)
+  1133  06D3  07C1               	addwf	(redgreen@j+1),f
+  1134                           	
+  1135  06D4                     l2052:	
+  1136  06D4  0841               	movf	(redgreen@j+1),w
+  1137  06D5  3A80               	xorlw	80h
+  1138  06D6  00FF               	movwf	btemp+1
+  1139  06D7  3080               	movlw	(high(0Bh))^80h
+  1140  06D8  027F               	subwf	btemp+1,w
+  1141  06D9  1D03               	skipz
+  1142  06DA  2EDD               	goto	u2455
+  1143  06DB  300B               	movlw	low(0Bh)
+  1144  06DC  0240               	subwf	(redgreen@j),w
+  1145  06DD                     u2455:
+  1146                           
+  1147  06DD  1C03               	skipc
+  1148  06DE  2EE0               	goto	u2451
+  1149  06DF  2EE1               	goto	u2450
+  1150  06E0                     u2451:
+  1151  06E0  2E80               	goto	l2032
+  1152  06E1                     u2450:
+  1153  06E1  2EE2               	goto	l575
+  1154                           	
+  1155  06E2                     l574:	
+  1156                           	line	75
+  1157                           	
+  1158  06E2                     l575:	
+  1159  06E2  0008               	return
+  1160                           	opt stack 0
+  1161                           GLOBAL	__end_of_redgreen
+  1162  06E3                     	__end_of_redgreen:
+  1163 ;; =============== function _redgreen ends ============
+  1164                           
+  1165                           	signat	_redgreen,88
+  1166                           	global	___awmod
+  1167                           psect	text145,local,class=CODE,delta=2
+  1168                           global __ptext145
+  1169  0573                     __ptext145:
+  1170                           
+  1171 ;; *************** function ___awmod *****************
+  1172 ;; Defined at:
+  1173 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.80\sources\awmod.c"
+  1174 ;; Parameters:    Size  Location     Type
+  1175 ;;  divisor         2    0[COMMON] int 
+  1176 ;;  dividend        2    2[COMMON] int 
+  1177 ;; Auto vars:     Size  Location     Type
+  1178 ;;  sign            1    6[COMMON] unsigned char 
+  1179 ;;  counter         1    5[COMMON] unsigned char 
+  1180 ;; Return value:  Size  Location     Type
+  1181 ;;                  2    0[COMMON] int 
+  1182 ;; Registers used:
+  1183 ;;		wreg, status,2, status,0
+  1184 ;; Tracked objects:
+  1185 ;;		On entry : 0/0
+  1186 ;;		On exit  : 0/0
+  1187 ;;		Unchanged: 0/0
+  1188 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1189 ;;      Params:         4       0       0       0       0
+  1190 ;;      Locals:         2       0       0       0       0
+  1191 ;;      Temps:          1       0       0       0       0
+  1192 ;;      Totals:         7       0       0       0       0
+  1193 ;;Total ram usage:        7 bytes
+  1194 ;; Hardware stack levels used:    1
+  1195 ;; This function calls:
+  1196 ;;		Nothing
+  1197 ;; This function is called by:
+  1198 ;;		_redgreen
+  1199 ;;		_yellow
+  1200 ;; This function uses a non-reentrant model
+  1201 ;;
+  1202                           psect	text145
+  1203                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.80\sources\awmod.c"
+  1204                           	line	5
+  1205                           	global	__size_of___awmod
+  1206  006A                     	__size_of___awmod	equ	__end_of___awmod-___awmod
+  1207                           	
+  1208  0573                     ___awmod:	
+  1209                           	opt	stack 6
+  1210                           ; Regs used in ___awmod: [wreg+status,2+status,0]
+  1211                           	line	8
+  1212                           	
+  1213  0573                     l1988:	
+  1214  0573  1003               	clrc
+  1215  0574  3000               	movlw	0
+  1216  0575  1803               	btfsc	status,0
+  1217  0576  3001               	movlw	1
+  1218  0577  00F6               	movwf	(___awmod@sign)
+  1219                           	line	9
+  1220                           	
+  1221  0578                     l1990:	
+  1222  0578  1FF3               	btfss	(___awmod@dividend+1),7
+  1223  0579  2D7B               	goto	u2341
+  1224  057A  2D7C               	goto	u2340
+  1225  057B                     u2341:
+  1226  057B  2D85               	goto	l1994
+  1227  057C                     u2340:
+  1228                           	line	10
+  1229                           	
+  1230  057C                     l1992:	
+  1231  057C  09F2               	comf	(___awmod@dividend),f
+  1232  057D  09F3               	comf	(___awmod@dividend+1),f
+  1233  057E  0AF2               	incf	(___awmod@dividend),f
+  1234  057F  1903               	skipnz
+  1235  0580  0AF3               	incf	(___awmod@dividend+1),f
+  1236                           	line	11
+  1237  0581  01F6               	clrf	(___awmod@sign)
+  1238  0582  1403               	bsf	status,0
+  1239  0583  0DF6               	rlf	(___awmod@sign),f
+  1240  0584  2D85               	goto	l1994
+  1241                           	line	12
+  1242                           	
+  1243  0585                     l804:	
+  1244                           	line	13
+  1245                           	
+  1246  0585                     l1994:	
+  1247  0585  1FF1               	btfss	(___awmod@divisor+1),7
+  1248  0586  2D88               	goto	u2351
+  1249  0587  2D89               	goto	u2350
+  1250  0588                     u2351:
+  1251  0588  2D8F               	goto	l1998
+  1252  0589                     u2350:
+  1253                           	line	14
+  1254                           	
+  1255  0589                     l1996:	
+  1256  0589  09F0               	comf	(___awmod@divisor),f
+  1257  058A  09F1               	comf	(___awmod@divisor+1),f
+  1258  058B  0AF0               	incf	(___awmod@divisor),f
+  1259  058C  1903               	skipnz
+  1260  058D  0AF1               	incf	(___awmod@divisor+1),f
+  1261  058E  2D8F               	goto	l1998
+  1262                           	
+  1263  058F                     l805:	
+  1264                           	line	15
+  1265                           	
+  1266  058F                     l1998:	
+  1267  058F  0871               	movf	(___awmod@divisor+1),w
+  1268  0590  0470               	iorwf	(___awmod@divisor),w
+  1269  0591  1903               	skipnz
+  1270  0592  2D94               	goto	u2361
+  1271  0593  2D95               	goto	u2360
+  1272  0594                     u2361:
+  1273  0594  2DCB               	goto	l2016
+  1274  0595                     u2360:
+  1275                           	line	16
+  1276                           	
+  1277  0595                     l2000:	
+  1278  0595  01F5               	clrf	(___awmod@counter)
+  1279  0596  1403               	bsf	status,0
+  1280  0597  0DF5               	rlf	(___awmod@counter),f
+  1281                           	line	17
+  1282  0598  2DA5               	goto	l2006
+  1283                           	
+  1284  0599                     l808:	
+  1285                           	line	18
+  1286                           	
+  1287  0599                     l2002:	
+  1288  0599  3001               	movlw	01h
+  1289                           	
+  1290  059A                     u2375:
+  1291  059A  1003               	clrc
+  1292  059B  0DF0               	rlf	(___awmod@divisor),f
+  1293  059C  0DF1               	rlf	(___awmod@divisor+1),f
+  1294  059D  3EFF               	addlw	-1
+  1295  059E  1D03               	skipz
+  1296  059F  2D9A               	goto	u2375
+  1297                           	line	19
+  1298                           	
+  1299  05A0                     l2004:	
+  1300  05A0  3001               	movlw	(01h)
+  1301  05A1  00F4               	movwf	(??___awmod+0)+0
+  1302  05A2  0874               	movf	(??___awmod+0)+0,w
+  1303  05A3  07F5               	addwf	(___awmod@counter),f
+  1304  05A4  2DA5               	goto	l2006
+  1305                           	line	20
+  1306                           	
+  1307  05A5                     l807:	
+  1308                           	line	17
+  1309                           	
+  1310  05A5                     l2006:	
+  1311  05A5  1FF1               	btfss	(___awmod@divisor+1),(15)&7
+  1312  05A6  2DA8               	goto	u2381
+  1313  05A7  2DA9               	goto	u2380
+  1314  05A8                     u2381:
+  1315  05A8  2D99               	goto	l2002
+  1316  05A9                     u2380:
+  1317  05A9  2DAB               	goto	l2008
+  1318                           	
+  1319  05AA                     l809:	
+  1320  05AA  2DAB               	goto	l2008
+  1321                           	line	21
+  1322                           	
+  1323  05AB                     l810:	
+  1324                           	line	22
+  1325                           	
+  1326  05AB                     l2008:	
+  1327  05AB  0871               	movf	(___awmod@divisor+1),w
+  1328  05AC  0273               	subwf	(___awmod@dividend+1),w
+  1329  05AD  1D03               	skipz
+  1330  05AE  2DB1               	goto	u2395
+  1331  05AF  0870               	movf	(___awmod@divisor),w
+  1332  05B0  0272               	subwf	(___awmod@dividend),w
+  1333  05B1                     u2395:
+  1334  05B1  1C03               	skipc
+  1335  05B2  2DB4               	goto	u2391
+  1336  05B3  2DB5               	goto	u2390
+  1337  05B4                     u2391:
+  1338  05B4  2DBC               	goto	l2012
+  1339  05B5                     u2390:
+  1340                           	line	23
+  1341                           	
+  1342  05B5                     l2010:	
+  1343  05B5  0870               	movf	(___awmod@divisor),w
+  1344  05B6  02F2               	subwf	(___awmod@dividend),f
+  1345  05B7  0871               	movf	(___awmod@divisor+1),w
+  1346  05B8  1C03               	skipc
+  1347  05B9  03F3               	decf	(___awmod@dividend+1),f
+  1348  05BA  02F3               	subwf	(___awmod@dividend+1),f
+  1349  05BB  2DBC               	goto	l2012
+  1350                           	
+  1351  05BC                     l811:	
+  1352                           	line	24
+  1353                           	
+  1354  05BC                     l2012:	
+  1355  05BC  3001               	movlw	01h
+  1356                           	
+  1357  05BD                     u2405:
+  1358  05BD  1003               	clrc
+  1359  05BE  0CF1               	rrf	(___awmod@divisor+1),f
+  1360  05BF  0CF0               	rrf	(___awmod@divisor),f
+  1361  05C0  3EFF               	addlw	-1
+  1362  05C1  1D03               	skipz
+  1363  05C2  2DBD               	goto	u2405
+  1364                           	line	25
+  1365                           	
+  1366  05C3                     l2014:	
+  1367  05C3  3001               	movlw	low(01h)
+  1368  05C4  02F5               	subwf	(___awmod@counter),f
+  1369  05C5  1D03               	btfss	status,2
+  1370  05C6  2DC8               	goto	u2411
+  1371  05C7  2DC9               	goto	u2410
+  1372  05C8                     u2411:
+  1373  05C8  2DAB               	goto	l2008
+  1374  05C9                     u2410:
+  1375  05C9  2DCB               	goto	l2016
+  1376                           	
+  1377  05CA                     l812:	
+  1378  05CA  2DCB               	goto	l2016
+  1379                           	line	26
+  1380                           	
+  1381  05CB                     l806:	
+  1382                           	line	27
+  1383                           	
+  1384  05CB                     l2016:	
+  1385  05CB  0876               	movf	(___awmod@sign),w
+  1386  05CC  1D03               	skipz
+  1387  05CD  2DCF               	goto	u2420
+  1388  05CE  2DD5               	goto	l2020
+  1389  05CF                     u2420:
+  1390                           	line	28
+  1391                           	
+  1392  05CF                     l2018:	
+  1393  05CF  09F2               	comf	(___awmod@dividend),f
+  1394  05D0  09F3               	comf	(___awmod@dividend+1),f
+  1395  05D1  0AF2               	incf	(___awmod@dividend),f
+  1396  05D2  1903               	skipnz
+  1397  05D3  0AF3               	incf	(___awmod@dividend+1),f
+  1398  05D4  2DD5               	goto	l2020
+  1399                           	
+  1400  05D5                     l813:	
+  1401                           	line	29
+  1402                           	
+  1403  05D5                     l2020:	
+  1404  05D5  0873               	movf	(___awmod@dividend+1),w
+  1405  05D6  01F1               	clrf	(?___awmod+1)
+  1406  05D7  07F1               	addwf	(?___awmod+1)
+  1407  05D8  0872               	movf	(___awmod@dividend),w
+  1408  05D9  01F0               	clrf	(?___awmod)
+  1409  05DA  07F0               	addwf	(?___awmod)
+  1410                           
+  1411  05DB  2DDC               	goto	l814
+  1412                           	
+  1413  05DC                     l2022:	
+  1414                           	line	30
+  1415                           	
+  1416  05DC                     l814:	
+  1417  05DC  0008               	return
+  1418                           	opt stack 0
+  1419                           GLOBAL	__end_of___awmod
+  1420  05DD                     	__end_of___awmod:
+  1421 ;; =============== function ___awmod ends ============
+  1422                           
+  1423                           	signat	___awmod,8314
+  1424                           	global	___awdiv
+  1425                           psect	text146,local,class=CODE,delta=2
+  1426                           global __ptext146
+  1427  05DD                     __ptext146:
+  1428                           
+  1429 ;; *************** function ___awdiv *****************
+  1430 ;; Defined at:
+  1431 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.80\sources\awdiv.c"
+  1432 ;; Parameters:    Size  Location     Type
+  1433 ;;  divisor         2    0[COMMON] int 
+  1434 ;;  dividend        2    2[COMMON] int 
+  1435 ;; Auto vars:     Size  Location     Type
+  1436 ;;  quotient        2    7[COMMON] int 
+  1437 ;;  sign            1    6[COMMON] unsigned char 
+  1438 ;;  counter         1    5[COMMON] unsigned char 
+  1439 ;; Return value:  Size  Location     Type
+  1440 ;;                  2    0[COMMON] int 
+  1441 ;; Registers used:
+  1442 ;;		wreg, status,2, status,0
+  1443 ;; Tracked objects:
+  1444 ;;		On entry : 0/0
+  1445 ;;		On exit  : 0/0
+  1446 ;;		Unchanged: 0/0
+  1447 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1448 ;;      Params:         4       0       0       0       0
+  1449 ;;      Locals:         4       0       0       0       0
+  1450 ;;      Temps:          1       0       0       0       0
+  1451 ;;      Totals:         9       0       0       0       0
+  1452 ;;Total ram usage:        9 bytes
+  1453 ;; Hardware stack levels used:    1
+  1454 ;; This function calls:
+  1455 ;;		Nothing
+  1456 ;; This function is called by:
+  1457 ;;		_redgreen
+  1458 ;;		_yellow
+  1459 ;; This function uses a non-reentrant model
+  1460 ;;
+  1461                           psect	text146
+  1462                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.80\sources\awdiv.c"
+  1463                           	line	5
+  1464                           	global	__size_of___awdiv
+  1465  0079                     	__size_of___awdiv	equ	__end_of___awdiv-___awdiv
+  1466                           	
+  1467  05DD                     ___awdiv:	
+  1468                           	opt	stack 6
+  1469                           ; Regs used in ___awdiv: [wreg+status,2+status,0]
+  1470                           	line	9
+  1471                           	
+  1472  05DD                     l1950:	
+  1473  05DD  1003               	clrc
+  1474  05DE  3000               	movlw	0
+  1475  05DF  1803               	btfsc	status,0
+  1476  05E0  3001               	movlw	1
+  1477  05E1  00F6               	movwf	(___awdiv@sign)
+  1478                           	line	10
+  1479                           	
+  1480  05E2                     l1952:	
+  1481  05E2  1FF1               	btfss	(___awdiv@divisor+1),7
+  1482  05E3  2DE5               	goto	u2241
+  1483  05E4  2DE6               	goto	u2240
+  1484  05E5                     u2241:
+  1485  05E5  2DEF               	goto	l1956
+  1486  05E6                     u2240:
+  1487                           	line	11
+  1488                           	
+  1489  05E6                     l1954:	
+  1490  05E6  09F0               	comf	(___awdiv@divisor),f
+  1491  05E7  09F1               	comf	(___awdiv@divisor+1),f
+  1492  05E8  0AF0               	incf	(___awdiv@divisor),f
+  1493  05E9  1903               	skipnz
+  1494  05EA  0AF1               	incf	(___awdiv@divisor+1),f
+  1495                           	line	12
+  1496  05EB  01F6               	clrf	(___awdiv@sign)
+  1497  05EC  1403               	bsf	status,0
+  1498  05ED  0DF6               	rlf	(___awdiv@sign),f
+  1499  05EE  2DEF               	goto	l1956
+  1500                           	line	13
+  1501                           	
+  1502  05EF                     l736:	
+  1503                           	line	14
+  1504                           	
+  1505  05EF                     l1956:	
+  1506  05EF  1FF3               	btfss	(___awdiv@dividend+1),7
+  1507  05F0  2DF2               	goto	u2251
+  1508  05F1  2DF3               	goto	u2250
+  1509  05F2                     u2251:
+  1510  05F2  2DFC               	goto	l737
+  1511  05F3                     u2250:
+  1512                           	line	15
+  1513                           	
+  1514  05F3                     l1958:	
+  1515  05F3  09F2               	comf	(___awdiv@dividend),f
+  1516  05F4  09F3               	comf	(___awdiv@dividend+1),f
+  1517  05F5  0AF2               	incf	(___awdiv@dividend),f
+  1518  05F6  1903               	skipnz
+  1519  05F7  0AF3               	incf	(___awdiv@dividend+1),f
+  1520                           	line	16
+  1521                           	
+  1522  05F8                     l1960:	
+  1523  05F8  3001               	movlw	(01h)
+  1524  05F9  00F4               	movwf	(??___awdiv+0)+0
+  1525  05FA  0874               	movf	(??___awdiv+0)+0,w
+  1526  05FB  06F6               	xorwf	(___awdiv@sign),f
+  1527                           	line	17
+  1528                           	
+  1529  05FC                     l737:	
+  1530                           	line	18
+  1531  05FC  3000               	movlw	low(0)
+  1532  05FD  00F7               	movwf	(___awdiv@quotient)
+  1533  05FE  3000               	movlw	high(0)
+  1534  05FF  00F8               	movwf	((___awdiv@quotient))+1
+  1535                           	line	19
+  1536  0600  0871               	movf	(___awdiv@divisor+1),w
+  1537  0601  0470               	iorwf	(___awdiv@divisor),w
+  1538  0602  1903               	skipnz
+  1539  0603  2E05               	goto	u2261
+  1540  0604  2E06               	goto	u2260
+  1541  0605                     u2261:
+  1542  0605  2E44               	goto	l1980
+  1543  0606                     u2260:
+  1544                           	line	20
+  1545                           	
+  1546  0606                     l1962:	
+  1547  0606  01F5               	clrf	(___awdiv@counter)
+  1548  0607  1403               	bsf	status,0
+  1549  0608  0DF5               	rlf	(___awdiv@counter),f
+  1550                           	line	21
+  1551  0609  2E16               	goto	l1968
+  1552                           	
+  1553  060A                     l740:	
+  1554                           	line	22
+  1555                           	
+  1556  060A                     l1964:	
+  1557  060A  3001               	movlw	01h
+  1558                           	
+  1559  060B                     u2275:
+  1560  060B  1003               	clrc
+  1561  060C  0DF0               	rlf	(___awdiv@divisor),f
+  1562  060D  0DF1               	rlf	(___awdiv@divisor+1),f
+  1563  060E  3EFF               	addlw	-1
+  1564  060F  1D03               	skipz
+  1565  0610  2E0B               	goto	u2275
+  1566                           	line	23
+  1567                           	
+  1568  0611                     l1966:	
+  1569  0611  3001               	movlw	(01h)
+  1570  0612  00F4               	movwf	(??___awdiv+0)+0
+  1571  0613  0874               	movf	(??___awdiv+0)+0,w
+  1572  0614  07F5               	addwf	(___awdiv@counter),f
+  1573  0615  2E16               	goto	l1968
+  1574                           	line	24
+  1575                           	
+  1576  0616                     l739:	
+  1577                           	line	21
+  1578                           	
+  1579  0616                     l1968:	
+  1580  0616  1FF1               	btfss	(___awdiv@divisor+1),(15)&7
+  1581  0617  2E19               	goto	u2281
+  1582  0618  2E1A               	goto	u2280
+  1583  0619                     u2281:
+  1584  0619  2E0A               	goto	l1964
+  1585  061A                     u2280:
+  1586  061A  2E1C               	goto	l1970
+  1587                           	
+  1588  061B                     l741:	
+  1589  061B  2E1C               	goto	l1970
+  1590                           	line	25
+  1591                           	
+  1592  061C                     l742:	
+  1593                           	line	26
+  1594                           	
+  1595  061C                     l1970:	
+  1596  061C  3001               	movlw	01h
+  1597                           	
+  1598  061D                     u2295:
+  1599  061D  1003               	clrc
+  1600  061E  0DF7               	rlf	(___awdiv@quotient),f
+  1601  061F  0DF8               	rlf	(___awdiv@quotient+1),f
+  1602  0620  3EFF               	addlw	-1
+  1603  0621  1D03               	skipz
+  1604  0622  2E1D               	goto	u2295
+  1605                           	line	27
+  1606  0623  0871               	movf	(___awdiv@divisor+1),w
+  1607  0624  0273               	subwf	(___awdiv@dividend+1),w
+  1608  0625  1D03               	skipz
+  1609  0626  2E29               	goto	u2305
+  1610  0627  0870               	movf	(___awdiv@divisor),w
+  1611  0628  0272               	subwf	(___awdiv@dividend),w
+  1612  0629                     u2305:
+  1613  0629  1C03               	skipc
+  1614  062A  2E2C               	goto	u2301
+  1615  062B  2E2D               	goto	u2300
+  1616  062C                     u2301:
+  1617  062C  2E35               	goto	l1976
+  1618  062D                     u2300:
+  1619                           	line	28
+  1620                           	
+  1621  062D                     l1972:	
+  1622  062D  0870               	movf	(___awdiv@divisor),w
+  1623  062E  02F2               	subwf	(___awdiv@dividend),f
+  1624  062F  0871               	movf	(___awdiv@divisor+1),w
+  1625  0630  1C03               	skipc
+  1626  0631  03F3               	decf	(___awdiv@dividend+1),f
+  1627  0632  02F3               	subwf	(___awdiv@dividend+1),f
+  1628                           	line	29
+  1629                           	
+  1630  0633                     l1974:	
+  1631  0633  1477               	bsf	(___awdiv@quotient)+(0/8),(0)&7
+  1632  0634  2E35               	goto	l1976
+  1633                           	line	30
+  1634                           	
+  1635  0635                     l743:	
+  1636                           	line	31
+  1637                           	
+  1638  0635                     l1976:	
+  1639  0635  3001               	movlw	01h
+  1640                           	
+  1641  0636                     u2315:
+  1642  0636  1003               	clrc
+  1643  0637  0CF1               	rrf	(___awdiv@divisor+1),f
+  1644  0638  0CF0               	rrf	(___awdiv@divisor),f
+  1645  0639  3EFF               	addlw	-1
+  1646  063A  1D03               	skipz
+  1647  063B  2E36               	goto	u2315
+  1648                           	line	32
+  1649                           	
+  1650  063C                     l1978:	
+  1651  063C  3001               	movlw	low(01h)
+  1652  063D  02F5               	subwf	(___awdiv@counter),f
+  1653  063E  1D03               	btfss	status,2
+  1654  063F  2E41               	goto	u2321
+  1655  0640  2E42               	goto	u2320
+  1656  0641                     u2321:
+  1657  0641  2E1C               	goto	l1970
+  1658  0642                     u2320:
+  1659  0642  2E44               	goto	l1980
+  1660                           	
+  1661  0643                     l744:	
+  1662  0643  2E44               	goto	l1980
+  1663                           	line	33
+  1664                           	
+  1665  0644                     l738:	
+  1666                           	line	34
+  1667                           	
+  1668  0644                     l1980:	
+  1669  0644  0876               	movf	(___awdiv@sign),w
+  1670  0645  1D03               	skipz
+  1671  0646  2E48               	goto	u2330
+  1672  0647  2E4E               	goto	l1984
+  1673  0648                     u2330:
+  1674                           	line	35
+  1675                           	
+  1676  0648                     l1982:	
+  1677  0648  09F7               	comf	(___awdiv@quotient),f
+  1678  0649  09F8               	comf	(___awdiv@quotient+1),f
+  1679  064A  0AF7               	incf	(___awdiv@quotient),f
+  1680  064B  1903               	skipnz
+  1681  064C  0AF8               	incf	(___awdiv@quotient+1),f
+  1682  064D  2E4E               	goto	l1984
+  1683                           	
+  1684  064E                     l745:	
+  1685                           	line	36
+  1686                           	
+  1687  064E                     l1984:	
+  1688  064E  0878               	movf	(___awdiv@quotient+1),w
+  1689  064F  01F1               	clrf	(?___awdiv+1)
+  1690  0650  07F1               	addwf	(?___awdiv+1)
+  1691  0651  0877               	movf	(___awdiv@quotient),w
+  1692  0652  01F0               	clrf	(?___awdiv)
+  1693  0653  07F0               	addwf	(?___awdiv)
+  1694                           
+  1695  0654  2E55               	goto	l746
+  1696                           	
+  1697  0655                     l1986:	
+  1698                           	line	37
+  1699                           	
+  1700  0655                     l746:	
+  1701  0655  0008               	return
+  1702                           	opt stack 0
+  1703                           GLOBAL	__end_of___awdiv
+  1704  0656                     	__end_of___awdiv:
+  1705 ;; =============== function ___awdiv ends ============
+  1706                           
+  1707                           	signat	___awdiv,8314
+  1708                           	global	_delay
+  1709                           psect	text147,local,class=CODE,delta=2
+  1710                           global __ptext147
+  1711  054B                     __ptext147:
+  1712                           
+  1713 ;; *************** function _delay *****************
+  1714 ;; Defined at:
+  1715 ;;		line 98 in file "E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+  1716 ;; Parameters:    Size  Location     Type
+  1717 ;;		None
+  1718 ;; Auto vars:     Size  Location     Type
+  1719 ;;  k               2    0[COMMON] int 
+  1720 ;; Return value:  Size  Location     Type
+  1721 ;;		None               void
+  1722 ;; Registers used:
+  1723 ;;		wreg, btemp+1
+  1724 ;; Tracked objects:
+  1725 ;;		On entry : 0/0
+  1726 ;;		On exit  : 0/0
+  1727 ;;		Unchanged: 0/0
+  1728 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1729 ;;      Params:         0       0       0       0       0
+  1730 ;;      Locals:         2       0       0       0       0
+  1731 ;;      Temps:          0       0       0       0       0
+  1732 ;;      Totals:         2       0       0       0       0
+  1733 ;;Total ram usage:        2 bytes
+  1734 ;; Hardware stack levels used:    1
+  1735 ;; This function calls:
+  1736 ;;		Nothing
+  1737 ;; This function is called by:
+  1738 ;;		_main
+  1739 ;;		_redgreen
+  1740 ;;		_yellow
+  1741 ;; This function uses a non-reentrant model
+  1742 ;;
+  1743                           psect	text147
+  1744                           	file	"E:\sai em pic\pic traffic light 2\pic traffic light test31.c"
+  1745                           	line	98
+  1746                           	global	__size_of_delay
+  1747  0028                     	__size_of_delay	equ	__end_of_delay-_delay
+  1748                           	
+  1749  054B                     _delay:	
+  1750                           	opt	stack 6
+  1751                           ; Regs used in _delay: [wreg+btemp+1]
+  1752                           	line	100
+  1753                           	
+  1754  054B                     l1940:	
+  1755                           ;pic traffic light test31.c: 99: int k;
+  1756                           ;pic traffic light test31.c: 100: for (k=0;k<=4000;k++);
+  1757  054B  3000               	movlw	low(0)
+  1758  054C  00F0               	movwf	(delay@k)
+  1759  054D  3000               	movlw	high(0)
+  1760  054E  00F1               	movwf	((delay@k))+1
+  1761                           	
+  1762  054F                     l1942:	
+  1763  054F  0871               	movf	(delay@k+1),w
+  1764  0550  3A80               	xorlw	80h
+  1765  0551  00FF               	movwf	btemp+1
+  1766  0552  308F               	movlw	(high(0FA1h))^80h
+  1767  0553  027F               	subwf	btemp+1,w
+  1768  0554  1D03               	skipz
+  1769  0555  2D58               	goto	u2225
+  1770  0556  30A1               	movlw	low(0FA1h)
+  1771  0557  0270               	subwf	(delay@k),w
+  1772  0558                     u2225:
+  1773                           
+  1774  0558  1C03               	skipc
+  1775  0559  2D5B               	goto	u2221
+  1776  055A  2D5C               	goto	u2220
+  1777  055B                     u2221:
+  1778  055B  2D5E               	goto	l1946
+  1779  055C                     u2220:
+  1780  055C  2D72               	goto	l587
+  1781                           	
+  1782  055D                     l1944:	
+  1783  055D  2D72               	goto	l587
+  1784                           	
+  1785  055E                     l585:	
+  1786                           	
+  1787  055E                     l1946:	
+  1788  055E  3001               	movlw	low(01h)
+  1789  055F  07F0               	addwf	(delay@k),f
+  1790  0560  1803               	skipnc
+  1791  0561  0AF1               	incf	(delay@k+1),f
+  1792  0562  3000               	movlw	high(01h)
+  1793  0563  07F1               	addwf	(delay@k+1),f
+  1794                           	
+  1795  0564                     l1948:	
+  1796  0564  0871               	movf	(delay@k+1),w
+  1797  0565  3A80               	xorlw	80h
+  1798  0566  00FF               	movwf	btemp+1
+  1799  0567  308F               	movlw	(high(0FA1h))^80h
+  1800  0568  027F               	subwf	btemp+1,w
+  1801  0569  1D03               	skipz
+  1802  056A  2D6D               	goto	u2235
+  1803  056B  30A1               	movlw	low(0FA1h)
+  1804  056C  0270               	subwf	(delay@k),w
+  1805  056D                     u2235:
+  1806                           
+  1807  056D  1C03               	skipc
+  1808  056E  2D70               	goto	u2231
+  1809  056F  2D71               	goto	u2230
+  1810  0570                     u2231:
+  1811  0570  2D5E               	goto	l1946
+  1812  0571                     u2230:
+  1813  0571  2D72               	goto	l587
+  1814                           	
+  1815  0572                     l586:	
+  1816                           	line	102
+  1817                           	
+  1818  0572                     l587:	
+  1819  0572  0008               	return
+  1820                           	opt stack 0
+  1821                           GLOBAL	__end_of_delay
+  1822  0573                     	__end_of_delay:
+  1823 ;; =============== function _delay ends ============
+  1824                           
+  1825                           	signat	_delay,88
+  1826                           psect	text148,local,class=CODE,delta=2
+  1827                           global __ptext148
+  1828  0000                     __ptext148:
+  1829                           	global	btemp
+  1830  007E                     	btemp set 07Eh
+  1831                           
+  1832                           	DABS	1,126,2	;btemp
+  1833                           	global	wtemp0
+  1834  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.80 build 6738 
+Symbol Table                                                                                   Sun Jan 28 18:16:40 2024
+
+                   pc 0002          ___awdiv@sign 0076                    fsr 0004                   l810 05AB  
+                 l811 05BC                   l740 060A                   l812 05CA                   l804 0585  
+                 l580 070D                   l741 061B                   l813 05D5                   l805 058F  
+                 l573 0680                   l581 076F                   l565 077B                   l742 061C  
+                 l814 05DC                   l806 05CB                   l574 06E2                   l582 076F  
+                 l566 07FC                   l743 0635                   l807 05A5                   l575 06E2  
+                 l567 07FD                   l744 0643                   l736 05EF                   l808 0599  
+                 l568 07FD                   l585 055E                   l745 064E                   l737 05FC  
+                 l809 05AA                   l586 0572                   l746 0655                   l738 0644  
+                 l587 0572                   l739 0616                   _RD0 0040                   _RD1 0041  
+                 fsr0 0004                   indf 0000          ___awmod@sign 0076                  l2000 0595  
+                l2010 05B5                  l2002 0599                  l2020 05D5                  l2012 05BC  
+                l2004 05A0                  l2100 0791                  l2022 05DC                  l2014 05C3  
+                l2006 05A5                  l2030 067F                  l2110 07A6                  l2102 0796  
+                l2008 05AB                  l2016 05CB                  l2040 06A1                  l2032 0680  
+                l2024 0656                  l2120 07BB                  l2112 07AB                  l2104 079B  
+                l2018 05CF                  l2050 06CC                  l2042 06A6                  l2034 0699  
+                l2026 066B                  l2130 07CF                  l2122 07BF                  l2114 07AF  
+                l2106 079F                  l2052 06D4                  l2044 06BF                  l2036 069A  
+                l2028 0671                  l2060 070C                  l2140 07E1                  l2132 07D1  
+                l2124 07C1                  l2116 07B1                  l2108 07A1                  l2046 06C0  
+                l2038 069B                  l2070 072E                  l2062 070D                  l2054 06E3  
+                l2150 07F6                  l2142 07E6                  l2134 07D6                  l2126 07C6  
+                l2118 07B6                  l2048 06C1                  l2080 0759                  l2072 0733  
+                l2064 0726                  l2056 06F8                  l2144 07EB                  l2136 07DB  
+                l2128 07CB                  l2082 0761                  l2074 074C                  l2066 0727  
+                l2058 06FE                  l2146 07EF                  l2138 07DF                  l2090 077F  
+                l2076 074D                  l2068 0728                  l2148 07F1                  l2092 0781  
+                l2084 0770                  l2078 074E                  l2094 0786                  l2086 0778  
+                l2096 078B                  l2088 077B                  l2098 078F                  l1940 054B  
+                l1942 054F                  l1950 05DD                  l1944 055D                  l1960 05F8  
+                l1952 05E2                  l1946 055E                  l1970 061C                  l1962 0606  
+                l1954 05E6                  l1948 0564                  l1972 062D                  l1964 060A  
+                l1980 0644                  l1956 05EF                  l1982 0648                  l1974 0633  
+                l1966 0611                  l1958 05F3                  l1990 0578                  l1984 064E  
+                l1976 0635                  l1968 0616                  l1992 057C                  l1986 0655  
+                l1978 063C                  l1994 0585                  l1996 0589                  l1988 0573  
+                l1998 058F                  u2220 055C                  u2300 062D                  u2221 055B  
+                u2301 062C                  u2230 0571                  u2231 0570                  u2320 0642  
+                u2240 05E6                  u2225 0558                  u2321 0641                  u2305 0629  
+                u2241 05E5                  u2330 0648                  u2250 05F3                  u2410 05C9  
+                u2235 056D                  u2315 0636                  u2251 05F2                  u2411 05C8  
+                u2260 0606                  u2420 05CF                  u2340 057C                  u2261 0605  
+                u2405 05BD                  u2341 057B                  u2350 0589                  u2430 065E  
+                u2351 0588                  u2280 061A                  u2360 0595                  u2440 067E  
+                u2281 0619                  u2361 0594                  u2441 067D                  u2450 06E1  
+                u2275 060B                  u2451 06E0                  u2380 05A9                  u2460 06EB  
+                u2381 05A8                  u2445 067A                  u2390 05B5                  u2470 070B  
+                u2295 061D                  u2391 05B4                  u2375 059A                  u2455 06DD  
+                u2471 070A                  u2480 076E                  u2481 076D                  u2395 05B1  
+                u2475 0707                  u2485 076A                  _main 0770                  btemp 007E  
+                start 0000                 ?_main 0070       __end_of___awdiv 0656       __end_of___awmod 05DD  
+     ___awdiv@divisor 0070       ___awdiv@counter 0075                 _PORTB 0006                 _PORTC 0007  
+               _PORTD 0008                 _TRISB 0086                 _TRISC 0087                 _TRISD 0088  
+               _delay 054B                 pclath 000A                 status 0003                 wtemp0 007E  
+        __end_of_main 0800                ??_main 007D                ?_delay 0070      ___awdiv@dividend 0072  
+           ??___awdiv 0074             ??___awmod 0074                delay@k 0070      ___awdiv@quotient 0077  
+     ___awmod@divisor 0070       ___awmod@counter 0075      __end_of_redgreen 06E3                _yellow 06E3  
+        yellow@segcmd 0034        __pcstackCOMMON 0070          __pidataBANK0 0537         __end_of_delay 0573  
+             ??_delay 0070            __pmaintext 0770               ?_yellow 0070             ?_redgreen 0070  
+             ___awdiv 05DD               ___awmod 0573       __size_of_yellow 008D      ___awmod@dividend 0072  
+      redgreen@segcmd 0034  end_of_initialization 0533               init_ram 0518            ??_redgreen 0079  
+             yellow@i 003E               yellow@j 0040        __end_of_yellow 0770   start_initialization 0525  
+        redgreen@F517 0020           __pdataBANK0 0020              ??_yellow 0079         __pcstackBANK0 0034  
+   __size_of_redgreen 008D              ?___awdiv 0070             __ptext143 06E3             __ptext144 0656  
+           __ptext145 0573             __ptext146 05DD             __ptext147 054B             __ptext148 0000  
+            ?___awmod 0070        __size_of_delay 0028            yellow@F521 002A             init_fetch 0514  
+    __size_of___awdiv 0079      __size_of___awmod 006A             redgreen@i 003E             redgreen@j 0040  
+       __size_of_main 0090              _redgreen 0656  
